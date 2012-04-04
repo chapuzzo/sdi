@@ -1,12 +1,16 @@
 
 public class ProxyNameService extends Proxy implements NameService{
+
+    public static final int BIND = 1;
+    public static final int RESOLVE = 2;
+
     public ProxyNameService (ObjectRef oref) {
         super (oref);
     }
 
     public void bind(String s, Object o){
         Invocation invo = oref.newInvocation();
-        invo.putInt(1);
+        invo.putInt(BIND);
         invo.putString(s);
 
         invo.putObject(o);
@@ -18,7 +22,7 @@ public class ProxyNameService extends Proxy implements NameService{
 
     public Object resolve(String s){
         Invocation invo = oref.newInvocation();
-        invo.putInt(2);
+        invo.putInt(RESOLVE);
         invo.putString(s);
 
         Object ret = invo.getObject();
