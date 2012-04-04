@@ -1,29 +1,30 @@
-// TO-DO: Complete this class
 
-public class ProxyA extends Proxy implements A {
-    public ProxyA (ObjectRef oref) {
+public class ProxyNameService extends Proxy implements NameService{
+    public ProxyNameService (ObjectRef oref) {
         super (oref);
     }
 
-    public void save (String s, int i) {
+    public void bind(String s, Object o){
         Invocation invo = oref.newInvocation();
         invo.putInt(1);
         invo.putString(s);
 
-        invo.putInt(i);
+        invo.putObject(o);
         invo.getInt();
 
         return;
+
     }
 
-    public int load (String s) {
+    public Object resolve(String s){
         Invocation invo = oref.newInvocation();
         invo.putInt(2);
         invo.putString(s);
 
-        int ret = invo.getInt();
+        Object ret = invo.getObject();
         invo.getInt();
 
         return ret;
     }
+
 }
