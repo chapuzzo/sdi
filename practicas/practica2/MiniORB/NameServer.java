@@ -4,7 +4,7 @@
 import java.net.*;
 import java.io.*;
 
-public class Server1 {
+public class NameServer {
     public static void main (String [] args) {
         String host;
         int port;
@@ -13,7 +13,7 @@ public class Server1 {
         if (args.length != 2) {
             System.err.println("Invalid arguments");
             System.err.println();
-            System.err.println("java Server1 <host> <port>");
+            System.err.println("java NameServer <host> <port>");
             return;
         }
 
@@ -33,16 +33,18 @@ public class Server1 {
         orb.serve();
 
         // Create "remote" objects and their corresponding skeletons
-        ClassA objA = new ClassA();
-        SkeletonA skA = new SkeletonA();
-        ClassB objB = new ClassB();
-        SkeletonB skB = new SkeletonB();
-        // ...
+        //~ ClassA objA = new ClassA();
+        //~ SkeletonA skA = new SkeletonA();
+        //~ ClassB objB = new ClassB();
+        //~ SkeletonB skB = new SkeletonB();
+        NameServiceClass objNS = new NameServiceClass();
+        SkeletonNameService skNS = new SkeletonNameService();
 
         // Register the object (and its skeleton) in the ORB
         // TO-DO Which are its object id and interface id?
-        orb.addObject(objA, skA);
-        orb.addObject(objB, skB);
+        //~ orb.addObject(objA, skA);
+        //~ orb.addObject(objB, skB);
+        orb.addObject(objNS, skNS);
 
 
     }
