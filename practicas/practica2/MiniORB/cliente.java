@@ -47,7 +47,7 @@ public class cliente {
 
     public void pruebaProxyByNameService(){
         pB = (ProxyB)NS.resolve("server");
-        //new ProxyB(new ObjectRef(hosts, ports, oid, iid));
+        //pB = new ProxyB(new ObjectRef(hosts, ports, oid, iid));
         pB.save("prueba", 42);
         pB.save("maspruebas", 142);
         System.out.println(pB.load("maspruebas"));

@@ -5,6 +5,7 @@ public class NameServiceClass implements NameService{
     private Hashtable<String,Object> table = new Hashtable<String, Object>();
 
     public Object resolve(String s){
+        System.out.println("resolviendo" + s);
         return table.get(s);
     }
 
