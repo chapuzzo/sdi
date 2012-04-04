@@ -26,12 +26,8 @@ public class cliente {
     String hostc, hosts;
     //MiniORB
     int portc, ports, oid = 0, iid = 0;
-<<<<<<< HEAD
     NameService NS;
     ProxyB pB;
-=======
-    ProxyB pA;
->>>>>>> d11d0c0de7cc3e4101e511d770b0be8e51c6a1af
 
 
 
@@ -50,7 +46,6 @@ public class cliente {
 
 
     public void pruebaProxyA(){
-<<<<<<< HEAD
         pB = (ProxyB)NS.resolve("server");
         //new ProxyB(new ObjectRef(hosts, ports, oid, iid));
         pB.save("prueba", 42);
@@ -58,14 +53,6 @@ public class cliente {
         System.out.println(pB.load("maspruebas"));
         System.out.println(pB.load("prueba"));
         System.out.println(pB.add("prueba","prueba"));
-=======
-        pA = new ProxyB(new ObjectRef(hosts, ports, oid, iid));
-        pA.save("prueba", 42);
-        pA.save("maspruebas", 142);
-        System.out.println(pA.load("maspruebas"));
-        System.out.println(pA.load("prueba"));
-        System.out.println(pA.add("prueba","prueba"));
->>>>>>> d11d0c0de7cc3e4101e511d770b0be8e51c6a1af
     }
 
     public boolean parseArgs(String args[]){
