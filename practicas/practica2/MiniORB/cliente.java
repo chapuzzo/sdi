@@ -24,10 +24,9 @@
 
 public class cliente {
     String hostc, hosts;
-    //MiniORB
     int portc, ports, oid = 0, iid = 0;
     NameService NS;
-    ProxyB pB;
+    B pB;
 
 
 
@@ -46,8 +45,11 @@ public class cliente {
 
 
     public void pruebaProxyByNameService(){
-        pB = (ProxyB)NS.resolve("server");
+        NS = new ProxyNameService(new ObjectRef(hosts, ports, oid, iid));
+
         //pB = new ProxyB(new ObjectRef(hosts, ports, oid, iid));
+        NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
+        pB = (B)NS.resolve("server");
         pB.save("prueba", 42);
         pB.save("maspruebas", 142);
         System.out.println(pB.load("maspruebas"));

@@ -5,88 +5,88 @@ import java.io.*;
 import java.net.*;
 
 public class ParseIn {
-	// InputStream to read data from
-	private InputStream is;
+    // InputStream to read data from
+    private InputStream is;
 
-	public ParseIn (InputStream is) {
-		this.is = is;
-	}
-    
-	public int getInt () {
-		byte [] b = new byte[4];
-		int val = 0;
+    public ParseIn (InputStream is) {
+        this.is = is;
+    }
 
-		try {
-			is.read(b);
-		} catch (IOException ioe) {
-			return -1;
-		}
+    public int getInt () {
+        byte [] b = new byte[4];
+        int val = 0;
 
-		for (int i = 0; i < 4; i++) {
-			val <<= 8;
-			if ( b[0] >= 0 && b[i] < 0 )
-				val |= ( 256 + b[i] );
-			else	
-				val |= b[i];
-		}
+        try {
+            is.read(b);
+        } catch (IOException ioe) {
+            return -1;
+        }
 
-		return val;
-	}
-    
-	public long getLong () {
-		return (long) getInt();
-	}
-    
-	public boolean getBool () {
-	        byte  b;
-        
-		try {
-			b = (byte) is.read();
+        for (int i = 0; i < 4; i++) {
+            val <<= 8;
+            if ( b[0] >= 0 && b[i] < 0 )
+                val |= ( 256 + b[i] );
+            else
+                val |= b[i];
+        }
 
-			if (b == 0) {
-				// 0 is false
-				return false;
-			} else {
-				// Other value is true
-				return true;
-			}
-		} catch (IOException ioe) {
-			return false;
-		}
-	}
-    
-	public String getString () {
-		// First read the length of the string
-		int l = getInt();
-		byte [] b = new byte[l];
+        return val;
+    }
 
-		try {
-			// Read the chars of the string
-			is.read(b);
-		} catch (IOException ioe) {
-		}
-        
-		return new String(b);
-	}
-    
-	public Object getObject () {
-	   System.out.println ("Ojooooo!! : has de implmementar estoooo");
-	   return null;
-	}
+    public long getLong () {
+        return (long) getInt();
+    }
 
-	public ObjectRef getObjectRef () {
-		// The object has 4 fields:
-		// 1) Address of the ORB
-		// 2) Port of the ORB
-		// 3) Object id
-		// 4) Interface id
-		String host = getString();
-		int port = getInt();
-		int obId = getInt();
-		int iId = getInt();
+    public boolean getBool () {
+            byte  b;
 
-		// Create and return an object reference with those values
-		ObjectRef oref = new ObjectRef(host,port,obId,iId);
-		return oref;
-	}
+        try {
+            b = (byte) is.read();
+
+            if (b == 0) {
+                // 0 is false
+                return false;
+            } else {
+                // Other value is true
+                return true;
+            }
+        } catch (IOException ioe) {
+            return false;
+        }
+    }
+
+    public String getString () {
+        // First read the length of the string
+        int l = getInt();
+        byte [] b = new byte[l];
+
+        try {
+            // Read the chars of the string
+            is.read(b);
+        } catch (IOException ioe) {
+        }
+
+        return new String(b);
+    }
+
+    public Object getObject () {
+       //System.out.println ("Ojooooo!! : has de implmementar estoooo");
+       return new ProxyB(getObjectRef());
+    }
+
+    public ObjectRef getObjectRef () {
+        // The object has 4 fields:
+        // 1) Address of the ORB
+        // 2) Port of the ORB
+        // 3) Object id
+        // 4) Interface id
+        String host = getString();
+        int port = getInt();
+        int obId = getInt();
+        int iId = getInt();
+
+        // Create and return an object reference with those values
+        ObjectRef oref = new ObjectRef(host,port,obId,iId);
+        return oref;
+    }
 }
