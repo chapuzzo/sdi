@@ -23,4 +23,5 @@ public class ClassB implements B  {
       int i = integer.intValue();
       return i;
    }
+
 }

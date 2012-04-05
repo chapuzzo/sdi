@@ -49,9 +49,16 @@ public class cliente {
 
         //pB = new ProxyB(new ObjectRef(hosts, ports, oid, iid));
         NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
+        NS.bind("server2",new ProxyB(new ObjectRef("127.0.0.1",5003,2,2)));
         pB = (B)NS.resolve("server");
         pB.save("prueba", 42);
         pB.save("maspruebas", 142);
+        System.out.println(pB.load("maspruebas"));
+        System.out.println(pB.load("prueba"));
+        System.out.println(pB.add("prueba","maspruebas"));
+        pB = (B)NS.resolve("server2");
+        pB.save("prueba", 564);
+        pB.save("maspruebas", 8456487);
         System.out.println(pB.load("maspruebas"));
         System.out.println(pB.load("prueba"));
         System.out.println(pB.add("prueba","maspruebas"));

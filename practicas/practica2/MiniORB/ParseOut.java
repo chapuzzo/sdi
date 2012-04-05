@@ -55,7 +55,8 @@ public class ParseOut {
 
     public void putObject (Object obj) {
        //System.out.println ("Ojooooo!! : has de implmementar estoooo");
-       putObjectRef(((ProxyB)obj).oref);
+       System.out.println ("getObject en ParseOut");
+       putObjectRef(((Proxy)obj).oref);
     }
 
     public void putObjectRef(ObjectRef oref) {
