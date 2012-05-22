@@ -72,7 +72,6 @@ public class ParseOut {
                     MiniORB orb = MiniORB.getOrb();
                     Skeleton sk = (Skeleton) cls.newInstance();
                     px = orb.addObject (obj, sk);
-                    //~ break;
                     putObjectRef(px.oref);
                 }
                 catch(Exception E){

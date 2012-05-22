@@ -20,6 +20,7 @@ public class MiniORB implements Runnable {
     private int NSport;
 
     private static MiniORB orb;
+    private NameService NS;
 
     public MiniORB (String host, int port) {
         objects = new Hashtable<Integer,Object>();
@@ -34,6 +35,7 @@ public class MiniORB implements Runnable {
         this(host, port);
         this.NShost = NShost;
         this.NSport = NSport;
+        //this.NS = new ProxyNameService(new ObjectRef(
     }
 
     public String getHost () {

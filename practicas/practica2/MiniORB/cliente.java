@@ -45,22 +45,23 @@ public class cliente {
 
 
     public void pruebaProxyByNameService(){
-        NS = new ProxyNameService(new ObjectRef(hostNS, portNS, oid, iid));
+        NS = new ProxyNameService(new ObjectRef(hostNS, portNS, 1, 3));
+        A pA2 = null;
 
-        //pB = new ProxyB(new ObjectRef(hosts, ports, oid, iid));
-        //NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
-        //NS.bind("server2",new ProxyB(new ObjectRef("127.0.0.1",5003,2,2)));
-        pA = (A)NS.resolve("ejemploA");
-        pA.save("cuarentaydos", 42);
+        pA = new ProxyA(new ObjectRef("localhost", 5001, 1, 1));
+        //~ NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
+        //~ NS.bind("server2",new ProxyB(new ObjectRef("127.0.0.1",5003,2,2)));
+        pA2 = (A)NS.resolve("ejemploA");
+        pA2.save("cuarentaydos", 42);
         //~ pA.save("maspruebas", 142);
         //~ System.out.println(pA.load("maspruebas"));
-        System.out.println(pA.load("cuarentaydos"));
+        System.out.println(pA2.load("cuarentaydos"));
         //System.out.println(pB.add("prueba","maspruebas"));
         //~ pB = (B)NS.resolve("server2");
-        //~ pB.save("prueba", 564);
+        pA.save("prueba", 564);
         //~ pB.save("maspruebas", 8456487);
         //~ System.out.println(pB.load("maspruebas"));
-        //~ System.out.println(pB.load("prueba"));
+        System.out.println(pA.load("prueba"));
         //~ System.out.println(pB.add("prueba","maspruebas"));
     }
 
