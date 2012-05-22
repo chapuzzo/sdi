@@ -12,7 +12,7 @@ public class ParseOut {
     }
 
     public void putInt (int v) {
-        int r = 0;
+        //int r = 0;
         byte [] b = new byte[4];
 
         for (int i = 0; i < 4; i++) {
@@ -44,7 +44,7 @@ public class ParseOut {
 
     public void putString (String v) {
         byte [] b = v.getBytes();
-        // First save its lenght
+        // First save its length
         putInt(b.length);
 
         try {
@@ -53,34 +53,38 @@ public class ParseOut {
         }
     }
 
-    public void putObject (Object obj) {
+   public void putObject (Object obj) {
        System.out.println ("putObject en ParseOut");
        Proxy px = null;
         if (obj instanceof Proxy) {
             px=(Proxy) obj;
+            putObjectRef(px.oref);
         }
         else {
             // Registrar el objeto!!!!
-            Class[] v =  obj.getClass().getInterfaces();
-
-            for (int x = 0; x<v.length; x++){
+            System.out.println(obj);
                 try{
-                    Class i = v[x];
+                    Class[] v =  obj.getClass().getInterfaces();
+            //~ for (int x = 0; x<v.length; x++){
+                //~ try{
+                    Class i = v[0];
                     String SkeletonName= "Skeleton" + i.getName();
                     Class cls = Class.forName(SkeletonName);
                     System.out.println(SkeletonName);
                     MiniORB orb = MiniORB.getOrb();
                     Skeleton sk = (Skeleton) cls.newInstance();
                     px = orb.addObject (obj, sk);
+                    System.out.println("Putting Object: " + px.oref);
                     putObjectRef(px.oref);
-                    putInt(0);
                 }
                 catch(Exception E){
                     System.out.println("Ha sucedido un error en putObject!! ");
                 }
 
-            }
+            //~ }
         }
+        //~ putObjectRef(px.oref);
+        System.out.println ("Object put");
 
 
 

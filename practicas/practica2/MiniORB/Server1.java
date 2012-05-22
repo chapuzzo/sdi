@@ -1,8 +1,8 @@
 // This class is a "server" that creates a ClassA object and registers it
 // in a MiniORB.
 
-import java.net.*;
-import java.io.*;
+//import java.net.*;
+//import java.io.*;
 
 public class Server1 {
     public static void main (String [] args) {
@@ -61,6 +61,8 @@ public class Server1 {
 
         ns.bind("ejemploA",objA);
         //~ ns.bind("ejemploB",objB );
+        //A pA = (A)ns.resolve("ejemploA");
+        //orb.addObject(pA,skA);
 
 
     }

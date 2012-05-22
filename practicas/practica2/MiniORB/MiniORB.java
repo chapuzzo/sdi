@@ -20,7 +20,7 @@ public class MiniORB implements Runnable {
     private int NSport;
 
     private static MiniORB orb;
-    private NameService NS;
+    //~ private NameService NS;
 
     public MiniORB (String host, int port) {
         objects = new Hashtable<Integer,Object>();
@@ -116,7 +116,7 @@ public class MiniORB implements Runnable {
                 // Start the worker
                 thread.start();
             } catch (IOException e) {
-                System.out.println("I can't handle a request");
+                System.out.println("I can't handle a request(MiniORB)");
                 e.printStackTrace();
             }
         }
@@ -170,7 +170,7 @@ public class MiniORB implements Runnable {
                 // Attend this request
                 demultiplexer(parseIn, parseOut);
             } catch (Exception e) {
-                System.out.println("I cant' handle a request");
+                System.out.println("I cant' handle a request(Worker)");
                 e.printStackTrace();
             }
         }

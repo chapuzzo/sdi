@@ -2,7 +2,7 @@
 // It reads data from an InputStream (of some socket).
 
 import java.io.*;
-import java.net.*;
+//import java.net.*;
 
 public class ParseIn {
     // InputStream to read data from
@@ -73,8 +73,10 @@ public class ParseIn {
        //System.out.println ("Ojooooo!! : has de implmementar estoooo");
        System.out.println ("getObject en ParseIn");
        ObjectRef or = getObjectRef();
+       System.out.println ("gotObjectRef: " +or);
+       getInt();
        Proxy p = new Proxy(or);
-       System.out.println("getting object: " + or + " on proxy: " +p);
+       System.out.println("getting proxy: " + p + " on object: " + or);
        return p;
     }
 

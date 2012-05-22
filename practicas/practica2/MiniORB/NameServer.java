@@ -1,8 +1,8 @@
 // This class is a "server" that creates a ClassA object and registers it
 // in a MiniORB.
 
-import java.net.*;
-import java.io.*;
+//import java.net.*;
+//import java.io.*;
 
 public class NameServer {
     public static void main (String[] args) {
@@ -41,6 +41,7 @@ public class NameServer {
         //~ orb.addObject(objA, skA);
         //~ orb.addObject(objB, skB);
         orb.addObject(objNS, skNS);
+        
 
 
     }
