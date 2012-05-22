@@ -43,6 +43,7 @@ public class SkeletonNameService implements Skeleton {
 
                 // Send back the value, as a result
                 pou.putObject(i);
+                System.out.println("Object put " + i);
 
                 break;
             }

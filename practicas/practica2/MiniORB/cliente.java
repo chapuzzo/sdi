@@ -51,11 +51,6 @@ public class cliente {
         pA = new ProxyA(new ObjectRef("localhost", 5001, 1, 1));
         //~ NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
         //~ NS.bind("server2",new ProxyB(new ObjectRef("127.0.0.1",5003,2,2)));
-        pA2 = (A)NS.resolve("ejemploA");
-        pA2.save("cuarentaydos", 42);
-        //~ pA.save("maspruebas", 142);
-        //~ System.out.println(pA.load("maspruebas"));
-        System.out.println(pA2.load("cuarentaydos"));
         //System.out.println(pB.add("prueba","maspruebas"));
         //~ pB = (B)NS.resolve("server2");
         pA.save("prueba", 564);
@@ -63,6 +58,18 @@ public class cliente {
         //~ System.out.println(pB.load("maspruebas"));
         System.out.println(pA.load("prueba"));
         //~ System.out.println(pB.add("prueba","maspruebas"));
+        //~ NS.bind("ejemploA",new
+        System.out.println("antes del resolve");
+        pA2 = (A)NS.resolve("ejemploA");
+        System.out.println("después del resolve");
+        pA2.save("cuarentaydos", 42);
+        System.out.println("después del save");
+        //~ pA.save("maspruebas", 142);
+        //~ System.out.println(pA.load("maspruebas"));
+        System.out.println("antes del load");
+        System.out.println(pA2.load("cuarentaydos"));
+        System.out.println("despues del load");
+
     }
 
     public boolean parseArgs(String args[]){

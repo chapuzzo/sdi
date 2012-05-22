@@ -73,6 +73,7 @@ public class ParseOut {
                     Skeleton sk = (Skeleton) cls.newInstance();
                     px = orb.addObject (obj, sk);
                     putObjectRef(px.oref);
+                    putInt(0);
                 }
                 catch(Exception E){
                     System.out.println("Ha sucedido un error en putObject!! ");
