@@ -54,9 +54,36 @@ public class ParseOut {
     }
 
     public void putObject (Object obj) {
-       //System.out.println ("Ojooooo!! : has de implmementar estoooo");
-       System.out.println ("getObject en ParseOut");
-       putObjectRef(((Proxy)obj).oref);
+       System.out.println ("putObject en ParseOut");
+       Proxy px = null;
+        if (obj instanceof Proxy) {
+            px=(Proxy) obj;
+        }
+        else {
+            // Registrar el objeto!!!!
+            Class[] v =  obj.getClass().getInterfaces();
+
+            for (int x = 0; x<v.length; x++){
+                try{
+                    Class i = v[x];
+                    String SkeletonName= "Skeleton" + i.getName();
+                    Class cls = Class.forName(SkeletonName);
+                    System.out.println(SkeletonName);
+                    MiniORB orb = MiniORB.getOrb();
+                    Skeleton sk = (Skeleton) cls.newInstance();
+                    px = orb.addObject (obj, sk);
+                    //~ break;
+                    putObjectRef(px.oref);
+                }
+                catch(Exception E){
+                    System.out.println("Ha sucedido un error en putObject!! ");
+                }
+
+            }
+        }
+
+
+
     }
 
     public void putObjectRef(ObjectRef oref) {

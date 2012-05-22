@@ -22,7 +22,7 @@ public class ProxyA extends Proxy implements A {
         invo.putString(s);
 
         int ret = invo.getInt();
-        invo.getInt();
+        invo.waitEnd();
 
         return ret;
     }

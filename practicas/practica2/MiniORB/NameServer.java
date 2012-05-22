@@ -5,7 +5,7 @@ import java.net.*;
 import java.io.*;
 
 public class NameServer {
-    public static void main (String [] args) {
+    public static void main (String[] args) {
         String host;
         int port;
         MiniORB orb = null;
@@ -33,10 +33,6 @@ public class NameServer {
         orb.serve();
 
         // Create "remote" objects and their corresponding skeletons
-        //~ ClassA objA = new ClassA();
-        //~ SkeletonA skA = new SkeletonA();
-        //~ ClassB objB = new ClassB();
-        //~ SkeletonB skB = new SkeletonB();
         NameServiceClass objNS = new NameServiceClass();
         SkeletonNameService skNS = new SkeletonNameService();
 

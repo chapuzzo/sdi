@@ -16,12 +16,24 @@ public class MiniORB implements Runnable {
     // Port of this ORB
     private int port;
 
+    private String NShost;
+    private int NSport;
+
+    private static MiniORB orb;
+
     public MiniORB (String host, int port) {
         objects = new Hashtable<Integer,Object>();
         skeletons = new Hashtable<Integer,Skeleton>();
         objCount = 0;
         this.host = host;
         this.port = port;
+        orb = this;
+    }
+
+    public MiniORB(String host, int port, String NShost, int NSport){
+        this(host, port);
+        this.NShost = NShost;
+        this.NSport = NSport;
     }
 
     public String getHost () {
@@ -58,6 +70,11 @@ public class MiniORB implements Runnable {
     // Returns the interface (skeleton) bound to the given interface id.
     public synchronized Skeleton getInterface (int iid) {
             return skeletons.get(new Integer(iid));
+    }
+
+    public synchronized NameService getNameService(){
+        ObjectRef oref = new ObjectRef(NShost, NSport, 1, 3);
+        return new ProxyNameService(oref);
     }
 
     // Starts the server
@@ -123,6 +140,7 @@ public class MiniORB implements Runnable {
         // Look for the skeleton in the table of skeletons
         sk = getInterface(iid);
 
+        System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: " + obj + ", sk: " + sk);
         // The skeleton knows how to attend the request
         sk.upcall(pin, pou, obj);
 
@@ -143,7 +161,9 @@ public class MiniORB implements Runnable {
         public void run () {
             try {
                 ParseIn parseIn = new ParseIn(clientSocket.getInputStream());
+                System.out.println("pin creado");
                 ParseOut parseOut = new ParseOut(clientSocket.getOutputStream());
+                System.out.println("pou creado");
 
                 // Attend this request
                 demultiplexer(parseIn, parseOut);
@@ -152,5 +172,9 @@ public class MiniORB implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static MiniORB getOrb(){
+        return orb;
     }
 }

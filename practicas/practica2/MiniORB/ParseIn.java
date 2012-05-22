@@ -72,7 +72,7 @@ public class ParseIn {
     public Object getObject () {
        //System.out.println ("Ojooooo!! : has de implmementar estoooo");
        System.out.println ("getObject en ParseIn");
-       return new ProxyB(getObjectRef());
+       return new Proxy(getObjectRef());
     }
 
     public ObjectRef getObjectRef () {
