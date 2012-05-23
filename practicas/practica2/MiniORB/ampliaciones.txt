@@ -1,0 +1,6 @@
+*   1- soporte a excepciones y objetos nulos
+*   2- soporte a vectores de objetos
+*   3- registro automático de objetos
+**  4- multiples interfaces
+*** 5- garbage collection
+*** 6- NameServer replicado

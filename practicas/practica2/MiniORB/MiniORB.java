@@ -20,7 +20,6 @@ public class MiniORB implements Runnable {
     private int NSport;
 
     private static MiniORB orb;
-    //~ private NameService NS;
 
     public MiniORB (String host, int port) {
         objects = new Hashtable<Integer,Object>();
@@ -35,7 +34,6 @@ public class MiniORB implements Runnable {
         this(host, port);
         this.NShost = NShost;
         this.NSport = NSport;
-        //this.NS = new ProxyNameService(new ObjectRef(
     }
 
     public String getHost () {
@@ -142,7 +140,7 @@ public class MiniORB implements Runnable {
         // Look for the skeleton in the table of skeletons
         sk = getInterface(iid);
 
-        System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: " + obj + ", sk: " + sk);
+        //~ System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: " + obj + ", sk: " + sk);
         // The skeleton knows how to attend the request
         sk.upcall(pin, pou, obj);
 
@@ -163,9 +161,7 @@ public class MiniORB implements Runnable {
         public void run () {
             try {
                 ParseIn parseIn = new ParseIn(clientSocket.getInputStream());
-                System.out.println("pin creado");
                 ParseOut parseOut = new ParseOut(clientSocket.getOutputStream());
-                System.out.println("pou creado");
 
                 // Attend this request
                 demultiplexer(parseIn, parseOut);

@@ -26,7 +26,7 @@ public class cliente {
     String hostc, hostNS;
     int portc, portNS, oid = 0, iid = 0;
     NameService NS;
-    A pA = null;
+    ProxyA pA = null;
 
 
 
@@ -62,7 +62,7 @@ public class cliente {
         //System.out.println(NS.resolve("mientero"));
         System.out.println("antes del resolve");
         System.out.println(NS);
-        pA = (A)NS.resolve("ejemploA");
+        pA = (ProxyA)NS.resolve("ejemploA");
         System.out.println("después del resolve");
         pA.save("cuarentaydos", 42);
         System.out.println("después del save");

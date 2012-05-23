@@ -75,9 +75,9 @@ public class ParseIn {
        ObjectRef or = getObjectRef();
        System.out.println ("gotObjectRef: " + or);
        //getInt();
-       Proxy p = new Proxy(or);
+       Object p = new Proxy(or);
        System.out.println("getting proxy: " + p + " on object: " + or);
-       return (Object)p;
+       return p;
     }
 
     public ObjectRef getObjectRef () {
