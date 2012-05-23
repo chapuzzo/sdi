@@ -17,16 +17,16 @@ public class ProxyNameService extends Proxy implements NameService{
 
     }
 
-    public Object resolve(String s){
+    public Proxy resolve(String s){
         Invocation invo = oref.newInvocation();
         invo.putInt(RESOLVE);
         invo.putString(s);
         Object ret = invo.getObject();
-        /*
-        if (ret instanceof ObjectRef)
+
+        /*if (ret instanceof ObjectRef)
             return new Proxy((ObjectRef)ret);
         else*/
-        return ret;
+        return new Proxy(((Proxy)ret).oref);
     }
 
 }

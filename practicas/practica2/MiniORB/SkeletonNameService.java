@@ -24,6 +24,7 @@ public class SkeletonNameService implements Skeleton {
                 i = pin.getObject();
 
                 // Invoke the corresponding method
+                System.out.println("binding: " + s);
                 NS.bind(s, i);
 
                 // In this case, it is not necessary
@@ -40,6 +41,7 @@ public class SkeletonNameService implements Skeleton {
                 s = pin.getString();
 
                 // Invoke the corresponding method
+                System.out.println("resolving: " + s);
                 i = NS.resolve(s);
 
                 // Send back the value, as a result

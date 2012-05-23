@@ -73,11 +73,11 @@ public class ParseIn {
        //System.out.println ("Ojooooo!! : has de implmementar estoooo");
        System.out.println ("getObject en ParseIn");
        ObjectRef or = getObjectRef();
-       System.out.println ("gotObjectRef: " +or);
-       getInt();
+       System.out.println ("gotObjectRef: " + or);
+       //getInt();
        Proxy p = new Proxy(or);
        System.out.println("getting proxy: " + p + " on object: " + or);
-       return p;
+       return (Object)p;
     }
 
     public ObjectRef getObjectRef () {

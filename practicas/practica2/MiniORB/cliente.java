@@ -62,7 +62,6 @@ public class cliente {
         //System.out.println(NS.resolve("mientero"));
         System.out.println("antes del resolve");
         System.out.println(NS);
-        //NS.bind("pA", pA);
         pA = (A)NS.resolve("ejemploA");
         System.out.println("después del resolve");
         pA.save("cuarentaydos", 42);
