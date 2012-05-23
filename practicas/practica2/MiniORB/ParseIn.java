@@ -77,8 +77,8 @@ public class ParseIn {
        ObjectRef or = getObjectRef();
        //~ System.out.println ("gotObjectRef: " + or);
        try { //creacion automática de Proxies en base a la clase del objeto
-            String ProxyName = "Proxy" + or.getClassName();
-            System.out.println ("ProxyName: " + ProxyName);
+            String ProxyName = "Proxy" + or.getInterfaceName();
+            //~ System.out.println ("ProxyName: " + ProxyName);
             Constructor<?>[] c = Class.forName(ProxyName).getConstructors();
             return c[0].newInstance(or);
        }

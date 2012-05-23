@@ -41,7 +41,7 @@ public class NameServer {
         //~ orb.addObject(objA, skA);
         //~ orb.addObject(objB, skB);
         orb.addObject(objNS, skNS);
-        
+
 
 
     }

@@ -95,7 +95,7 @@ public class ParseOut {
             // Write the interface id of the object
             putInt(oref.getIid());
 
-            putString(oref.getClassName());
+            putString(oref.getInterfaceName());
         } catch (Exception ioe) {
         }
     }

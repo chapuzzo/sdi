@@ -41,7 +41,6 @@ public class cliente {
         }
         else
             c.pruebaProxyByNameService();
-        System.out.println("fin cliente");
     }
 
 
@@ -49,7 +48,6 @@ public class cliente {
         //NS = MiniORB.getNameService();
         orb = new MiniORB(hostc,portc,hostNS,portNS);
         //~ orb.serve();
-
 
         NS = orb.getNameService();
         try{
@@ -81,10 +79,12 @@ public class cliente {
             //~ Proxy pA = orb.addObject(a,skA);
             //~ Object o = orb.getObject(pA.oref.getOid());
             pA.save("cuarentaydos", 42);
-            pA.save("cinco", 5);
+            //pA.save("cinco", 5);
             pB.save("primero",pA.load("cinco"));
             pB.save("segundo",pA.load("cuarentaydos"));
-            System.out.println(pB.add("primero","segundo"));
+            int res = pB.add("primero","segundo");
+            System.out.println(res);
+            pA.save("cinco",res);
             System.out.println(pA.load("cuarentaydos"));
 
             //~ System.out.println(o.getClass().getName());
@@ -94,7 +94,6 @@ public class cliente {
                 //~ System.out.println("bump!");
             //~ }
 
-            System.out.println("fin prueba");
         }
         catch(Exception E){
             E.printStackTrace();
@@ -105,7 +104,7 @@ public class cliente {
 
     public boolean parseArgs(String args[]){
 
-        if (args.length < 6){
+        if (args.length < 4){
             System.err.println("Invalid argument number: " + args.length);
             return false;
         }
@@ -128,7 +127,7 @@ public class cliente {
             return false;
         }
 
-        //if (args.length > 4)
+        if (args.length > 4)
         try {
             oid = (new Integer(args[4])).intValue();
         } catch (Exception e) {
@@ -136,7 +135,7 @@ public class cliente {
             return false;
         }
 
-        //if (args.length > 5)
+        if (args.length > 5)
         try {
             iid = (new Integer(args[5])).intValue();
         } catch (Exception e) {
