@@ -45,7 +45,9 @@ public class cliente {
 
 
     public void pruebaProxyByNameService(){
-        NS = new ProxyNameService(new ObjectRef(hostNS, portNS, 1, 3));
+        NS = MiniOrb.getNameService();
+        
+        //NS = new ProxyNameService(new ObjectRef(hostNS, portNS, 1, 3));
 
         //pA2 = new ProxyA(new ObjectRef("localhost", 5001, 1, 1));
         //~ NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
@@ -62,7 +64,7 @@ public class cliente {
         //System.out.println(NS.resolve("mientero"));
         System.out.println("antes del resolve");
         System.out.println(NS);
-        pA = (ProxyA)NS.resolve("ejemploA");
+        pA = (A)NS.resolve("ejemploA");
         System.out.println("después del resolve");
         pA.save("cuarentaydos", 42);
         System.out.println("después del save");
