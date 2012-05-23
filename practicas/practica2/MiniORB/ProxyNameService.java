@@ -21,12 +21,8 @@ public class ProxyNameService extends Proxy implements NameService{
         Invocation invo = oref.newInvocation();
         invo.putInt(RESOLVE);
         invo.putString(s);
-        Object ret = invo.getObject();
-
-        /*if (ret instanceof ObjectRef)
-            return new Proxy((ObjectRef)ret);
-        else*/
-        return new Proxy(((Proxy)ret).oref);
+        Object or = invo.getObject();
+        return or;
     }
 
 }

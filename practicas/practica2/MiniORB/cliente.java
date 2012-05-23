@@ -72,10 +72,10 @@ public class cliente {
             //~ System.out.println("antes del resolve");
             //~ System.out.println(NS);
             //~ pA = (A)NS.resolve("ejemploA");
-            Proxy o = (Proxy)NS.resolve("ejemploA");
-            A pA = (A)new ProxyA(o.oref);
-            o = (Proxy)NS.resolve("ejemploB");
-            B pB = (B)new ProxyB(o.oref);
+            A pA = (A)NS.resolve("ejemploA");
+            //~ A pA = (A)new ProxyA(o.oref);
+            B pB = (B)NS.resolve("ejemploB");
+            //~ B pB = (B)new ProxyB(o.oref);
             //~ A a = new ClassA();
             //~ SkeletonA skA = new SkeletonA();
             //~ Proxy pA = orb.addObject(a,skA);

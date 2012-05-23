@@ -54,9 +54,9 @@ public class ParseOut {
     }
 
    public void putObject (Object obj) {
-       System.out.println ("putObject en ParseOut");
+       //~ System.out.println ("putObject en ParseOut");
        Proxy px = null;
-       System.out.println("pO->"+obj.getClass().getName());
+       //~ System.out.println("pO->"+obj.getClass().getName());
         if (obj instanceof Proxy) {
             //px=(Proxy) obj;
             //~ putObjectRef(px.oref);
@@ -69,11 +69,11 @@ public class ParseOut {
                     Class i = v[x];
                     String SkeletonName= "Skeleton" + i.getName();
                     Class cls = Class.forName(SkeletonName);
-                    System.out.println(SkeletonName);
+                    //~ System.out.println(SkeletonName);
                     MiniORB orb = MiniORB.getOrb();
                     Skeleton sk = (Skeleton) cls.newInstance();
                     px = orb.addObject (obj, sk);
-                    System.out.println("Putting Object: " + px.oref);
+                    //~ System.out.println("Putting Object: " + px.oref);
                     putObjectRef(px.oref);
                 }
             }
@@ -82,7 +82,7 @@ public class ParseOut {
             }
         }
         //~ putObjectRef(px.oref);
-        System.out.println ("Object put");
+        //~ System.out.println ("Object put");
     }
 
     public void putObjectRef(ObjectRef oref) {
