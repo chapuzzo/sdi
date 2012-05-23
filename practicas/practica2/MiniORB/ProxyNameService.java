@@ -17,7 +17,7 @@ public class ProxyNameService extends Proxy implements NameService{
 
     }
 
-    public Proxy resolve(String s){
+    public Object resolve(String s){
         Invocation invo = oref.newInvocation();
         invo.putInt(RESOLVE);
         invo.putString(s);

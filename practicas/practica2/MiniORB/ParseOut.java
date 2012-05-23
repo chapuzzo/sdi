@@ -58,36 +58,31 @@ public class ParseOut {
        Proxy px = null;
         if (obj instanceof Proxy) {
             px=(Proxy) obj;
-            putObjectRef(px.oref);
+            //~ putObjectRef(px.oref);
         }
         else {
-            // Registrar el objeto!!!!
             System.out.println(obj);
                 try{
                     Class[] v =  obj.getClass().getInterfaces();
-            //~ for (int x = 0; x<v.length; x++){
-                //~ try{
-                    Class i = v[0];
-                    String SkeletonName= "Skeleton" + i.getName();
-                    Class cls = Class.forName(SkeletonName);
-                    System.out.println(SkeletonName);
-                    MiniORB orb = MiniORB.getOrb();
-                    Skeleton sk = (Skeleton) cls.newInstance();
-                    px = orb.addObject (obj, sk);
-                    System.out.println("Putting Object: " + px.oref);
-                    putObjectRef(px.oref);
+                    for (int x = 0; x<v.length; x++){
+                        Class i = v[0];
+                        String SkeletonName= "Skeleton" + i.getName();
+                        Class cls = Class.forName(SkeletonName);
+                        System.out.println(SkeletonName);
+                        MiniORB orb = MiniORB.getOrb();
+                        Skeleton sk = (Skeleton) cls.newInstance();
+                        px = orb.addObject (obj, sk);
+                        System.out.println("Putting Object: " + px.oref);
+                        //~ putObjectRef(px.oref);
+                    }
                 }
                 catch(Exception E){
-                    System.out.println("Ha sucedido un error en putObject!! ");
+                    System.out.println("Ha sucedido un error en putObject!! " + E);
                 }
 
-            //~ }
         }
-        //~ putObjectRef(px.oref);
+        putObjectRef(px.oref);
         System.out.println ("Object put");
-
-
-
     }
 
     public void putObjectRef(ObjectRef oref) {

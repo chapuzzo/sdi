@@ -25,8 +25,9 @@
 public class cliente {
     String hostc, hostNS;
     int portc, portNS, oid = 0, iid = 0;
-    NameService NS;
-    ProxyA pA = null;
+    MiniORB orb = null;
+    NameService NS = null;
+    A pA = null;
 
 
 
@@ -34,6 +35,8 @@ public class cliente {
         /*for (int i = 0; i<args.length; i++)
         System.err.println(args[i]);*/
         cliente c = new cliente();
+
+
         if (! c.parseArgs(args)){
             System.err.println(
                 "use:\n\t $ java cliente <hostc> <portc> <hostNS> <portNS> [oid] [iid]"
@@ -45,8 +48,10 @@ public class cliente {
 
 
     public void pruebaProxyByNameService(){
-        NS = MiniOrb.getNameService();
-        
+        //NS = MiniORB.getNameService();
+        orb = new MiniORB(hostc,portc,hostNS,portNS);
+        NS = orb.getNameService();
+
         //NS = new ProxyNameService(new ObjectRef(hostNS, portNS, 1, 3));
 
         //pA2 = new ProxyA(new ObjectRef("localhost", 5001, 1, 1));

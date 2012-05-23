@@ -63,6 +63,10 @@ public class ObjectRef {
         return iid;
     }
 
+    public String toString(){
+        return "oref: [" + getHost() + ":" + getPort() + "(oid:" + getOid() + ", iid:" + getIid() + ")]";
+    }
+
     // An ObjectInvocation represents an invocation to a remote object
     class ObjectInvocation implements Invocation {
         ParseIn  parseIn;

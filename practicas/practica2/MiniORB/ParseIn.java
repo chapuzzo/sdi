@@ -76,20 +76,23 @@ public class ParseIn {
        System.out.println ("gotObjectRef: " + or);
        //getInt();
        //Object p = new Proxy(or);
-       switch (or.iid) {
-           case 1:  // "A"
+       switch (or.getIid()) {
+            case 1:  // "A"
+                System.out.println ("recibiendo A");
                 return new ProxyA(or);
             case 2: // B
+                System.out.println ("recibiendo B");
                 return new ProxyB(or);
             case 3: // NameService
+                System.out.println ("recibiendo NS");
                 return new ProxyNameService(or);
             default:
                 System.out.println ("mal!!");
        }
-       
-       
-       System.out.println("getting proxy: " + p + " on object: " + or);
-       return p;
+
+
+       //~ System.out.println("getting proxy: " + p + " on object: " + or);
+       return null;
     }
 
     public ObjectRef getObjectRef () {

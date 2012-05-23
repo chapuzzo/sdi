@@ -29,7 +29,6 @@ public class SkeletonNameService implements Skeleton {
 
                 // In this case, it is not necessary
                 // to write any value as a return
-                //pou.putInt(0);
 
                 break;
             }
@@ -46,8 +45,6 @@ public class SkeletonNameService implements Skeleton {
 
                 // Send back the value, as a result
                 pou.putObject(i);
-                //System.out.println("Object put " + i);
-                //pou.putInt(0);
 
                 break;
             }
