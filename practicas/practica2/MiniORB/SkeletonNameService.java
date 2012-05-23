@@ -5,8 +5,6 @@ public class SkeletonNameService implements Skeleton {
     private int iid = 3;
 
     public void upcall (ParseIn pin, ParseOut pou, Object obj) {
-        // We can assume that obj is an instance of a class
-        // that implements A
             NameService NS = (NameService)obj;
 
         // Read a number that identifies the method to invoke
@@ -24,7 +22,7 @@ public class SkeletonNameService implements Skeleton {
                 i = pin.getObject();
 
                 // Invoke the corresponding method
-                System.out.println("binding: " + s);
+                //~ System.out.println("binding: " + s);
                 NS.bind(s, i);
 
                 // In this case, it is not necessary
@@ -40,7 +38,7 @@ public class SkeletonNameService implements Skeleton {
                 s = pin.getString();
 
                 // Invoke the corresponding method
-                System.out.println("resolving: " + s);
+                //~ System.out.println("resolving: " + s);
                 i = NS.resolve(s);
 
                 // Send back the value, as a result

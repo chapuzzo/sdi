@@ -5,12 +5,15 @@ public class NameServiceClass implements NameService{
     private Hashtable<String,Object> table = new Hashtable<String, Object>();
 
     public Object resolve(String s){
-        //~ System.out.println("resolviendo " + s);
-        return (Object)table.get(s);
+        Object o = table.get(s);
+        System.out.print("resolviendo " + s + " que es de tipo:");
+        System.out.println(o.getClass().getName());
+        return o;
     }
 
     public void bind(String s, Object o){
-        //~ System.out.println("binding " + s);
+        System.out.print("binding " + s+ " que es de tipo:");
+        System.out.println(o.getClass().getName());
         table.put(s, (Object)o);
     }
 

@@ -27,9 +27,6 @@ public class cliente {
     int portc, portNS, oid = 0, iid = 0;
     MiniORB orb = null;
     NameService NS = null;
-    A pA = null;
-
-
 
     public static void main (String args[]) {
         /*for (int i = 0; i<args.length; i++)
@@ -39,43 +36,70 @@ public class cliente {
 
         if (! c.parseArgs(args)){
             System.err.println(
-                "use:\n\t $ java cliente <hostc> <portc> <hostNS> <portNS> [oid] [iid]"
+                "uso:\n\t $ java cliente <hostc> <portc> <hostNS> <portNS> //[oid] [iid]"
                 );
         }
         else
             c.pruebaProxyByNameService();
+        System.out.println("fin cliente");
     }
 
 
     public void pruebaProxyByNameService(){
         //NS = MiniORB.getNameService();
         orb = new MiniORB(hostc,portc,hostNS,portNS);
+        orb.serve();
+
+
         NS = orb.getNameService();
+        try{
 
-        //NS = new ProxyNameService(new ObjectRef(hostNS, portNS, 1, 3));
+            //NS = new ProxyNameService(new ObjectRef(hostNS, portNS, 1, 3));
 
-        //pA2 = new ProxyA(new ObjectRef("localhost", 5001, 1, 1));
-        //~ NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
-        //~ NS.bind("server2",new ProxyB(new ObjectRef("127.0.0.1",5003,2,2)));
-        //System.out.println(pB.add("prueba","maspruebas"));
-        //~ pB = (B)NS.resolve("server2");
-        //pA2.save("prueba", 564);
-        //~ pB.save("maspruebas", 8456487);
-        //~ System.out.println(pB.load("maspruebas"));
-        //System.out.println(pA2.load("prueba"));
-        //~ System.out.println(pB.add("prueba","maspruebas"));
-        //~ NS.bind("ejemploA",new
-        //NS.bind("mientero",new Integer(5));
-        //System.out.println(NS.resolve("mientero"));
-        System.out.println("antes del resolve");
-        System.out.println(NS);
-        pA = (A)NS.resolve("ejemploA");
-        System.out.println("después del resolve");
-        pA.save("cuarentaydos", 42);
-        System.out.println("después del save");
-        System.out.println("antes del load");
-        System.out.println(pA.load("cuarentaydos"));
-        System.out.println("despues del load");
+            //pA2 = new ProxyA(new ObjectRef("localhost", 5001, 1, 1));
+            //~ NS.bind("server",new ProxyB(new ObjectRef("127.0.0.1",5002,2,2)));
+            //~ NS.bind("server2",new ProxyB(new ObjectRef("127.0.0.1",5003,2,2)));
+            //System.out.println(pB.add("prueba","maspruebas"));
+            //~ pB = (B)NS.resolve("server2");
+            //pA2.save("prueba", 564);
+            //~ pB.save("maspruebas", 8456487);
+            //~ System.out.println(pB.load("maspruebas"));
+            //System.out.println(pA2.load("prueba"));
+            //~ System.out.println(pB.add("prueba","maspruebas"));
+            //~ NS.bind("ejemploA",new
+            //NS.bind("mientero",new Integer(5));
+            //System.out.println(NS.resolve("mientero"));
+            //~ System.out.println("antes del resolve");
+            //~ System.out.println(NS);
+            //~ pA = (A)NS.resolve("ejemploA");
+            Proxy o = (Proxy)NS.resolve("ejemploA");
+            A pA = (A)new ProxyA(o.oref);
+            o = (Proxy)NS.resolve("ejemploB");
+            B pB = (B)new ProxyB(o.oref);
+            //~ A a = new ClassA();
+            //~ SkeletonA skA = new SkeletonA();
+            //~ Proxy pA = orb.addObject(a,skA);
+            //~ Object o = orb.getObject(pA.oref.getOid());
+            pA.save("cuarentaydos", 42);
+            pA.save("cinco", 5);
+            pB.save("primero",pA.load("cinco"));
+            pB.save("segundo",pA.load("cuarentaydos"));
+            System.out.println(pB.add("primero","segundo"));
+            System.out.println(pA.load("cuarentaydos"));
+
+            //~ System.out.println(o.getClass().getName());
+            //~ Class<?> x[] = o.getClass().getInterfaces();
+            //~ for (int i = 0; i < x.length; i++){
+                //~ System.out.println(x[i].getName());
+                //~ System.out.println("bump!");
+            //~ }
+
+            System.out.println("fin prueba");
+        }
+        catch(Exception E){
+            E.printStackTrace();
+        }
+
 
     }
 

@@ -47,19 +47,19 @@ public class Server2 {
         NameService ns = orb.getNameService();
 
         // Create "remote" objects and their corresponding skeletons
-        ClassA objA = new ClassA();
-        SkeletonA skA = new SkeletonA();
+        ClassB objB = new ClassB();
+        SkeletonB skB = new SkeletonB();
         //~ ClassB objB = new ClassB();
         //~ SkeletonB skB = new SkeletonB();
         // ...
 
         // Register the object (and its skeleton) in the ORB
         // TO-DO Which are its object id and interface id?
-        orb.addObject(objA, skA);
+        orb.addObject(objB, skB);
         //B b = (B) orb.addObject(objB, skB);
 
 
-        ns.bind("ejemploA2",objA);
+        ns.bind("ejemploB",objB);
         //~ ns.bind("ejemploB",objB );
         //A pA = (A)ns.resolve("ejemploA");
         //orb.addObject(pA,skA);

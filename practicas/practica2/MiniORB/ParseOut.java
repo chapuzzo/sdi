@@ -56,32 +56,32 @@ public class ParseOut {
    public void putObject (Object obj) {
        System.out.println ("putObject en ParseOut");
        Proxy px = null;
+       System.out.println("pO->"+obj.getClass().getName());
         if (obj instanceof Proxy) {
-            px=(Proxy) obj;
+            //px=(Proxy) obj;
             //~ putObjectRef(px.oref);
+            putObjectRef(((Proxy)obj).oref);
         }
         else {
-            System.out.println(obj);
-                try{
-                    Class[] v =  obj.getClass().getInterfaces();
-                    for (int x = 0; x<v.length; x++){
-                        Class i = v[0];
-                        String SkeletonName= "Skeleton" + i.getName();
-                        Class cls = Class.forName(SkeletonName);
-                        System.out.println(SkeletonName);
-                        MiniORB orb = MiniORB.getOrb();
-                        Skeleton sk = (Skeleton) cls.newInstance();
-                        px = orb.addObject (obj, sk);
-                        System.out.println("Putting Object: " + px.oref);
-                        //~ putObjectRef(px.oref);
-                    }
+            try{
+                Class[] v =  obj.getClass().getInterfaces();
+                for (int x = 0; x<v.length; x++){
+                    Class i = v[x];
+                    String SkeletonName= "Skeleton" + i.getName();
+                    Class cls = Class.forName(SkeletonName);
+                    System.out.println(SkeletonName);
+                    MiniORB orb = MiniORB.getOrb();
+                    Skeleton sk = (Skeleton) cls.newInstance();
+                    px = orb.addObject (obj, sk);
+                    System.out.println("Putting Object: " + px.oref);
+                    putObjectRef(px.oref);
                 }
-                catch(Exception E){
-                    System.out.println("Ha sucedido un error en putObject!! " + E);
-                }
-
+            }
+            catch(Exception E){
+                System.out.println("Ha sucedido un error en putObject!! " + E);
+            }
         }
-        putObjectRef(px.oref);
+        //~ putObjectRef(px.oref);
         System.out.println ("Object put");
     }
 
