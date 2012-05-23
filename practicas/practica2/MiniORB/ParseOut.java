@@ -58,9 +58,8 @@ public class ParseOut {
        Proxy px = null;
        //~ System.out.println("pO->"+obj.getClass().getName());
         if (obj instanceof Proxy) {
-            //px=(Proxy) obj;
+            px = (Proxy) obj;
             //~ putObjectRef(px.oref);
-            putObjectRef(((Proxy)obj).oref);
         }
         else {
             try{
@@ -74,14 +73,14 @@ public class ParseOut {
                     Skeleton sk = (Skeleton) cls.newInstance();
                     px = orb.addObject (obj, sk);
                     //~ System.out.println("Putting Object: " + px.oref);
-                    putObjectRef(px.oref);
+                    //~ putObjectRef(px.oref);
                 }
             }
             catch(Exception E){
                 System.out.println("Ha sucedido un error en putObject!! " + E);
             }
         }
-        //~ putObjectRef(px.oref);
+        putObjectRef(px.oref);
         //~ System.out.println ("Object put");
     }
 
@@ -95,6 +94,8 @@ public class ParseOut {
             putInt(oref.getOid());
             // Write the interface id of the object
             putInt(oref.getIid());
+
+            putString(oref.getClassName());
         } catch (Exception ioe) {
         }
     }

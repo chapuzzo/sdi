@@ -54,7 +54,7 @@ public class MiniORB implements Runnable {
         skeletons.put(new Integer(sk.getIid()), sk);
 
         // Create an object reference for the object
-        ObjectRef oref = new ObjectRef(host, port, objCount, sk.getIid());
+        ObjectRef oref = new ObjectRef(host, port, objCount, sk.getIid(), obj.getClass().getInterfaces()[0].getName());
         // Create a proxy for the object
         Proxy proxy = sk.createProxy(oref);
 
@@ -73,7 +73,7 @@ public class MiniORB implements Runnable {
     }
 
     public synchronized NameService getNameService(){
-        ObjectRef oref = new ObjectRef(NShost, NSport, 1, 3);
+        ObjectRef oref = new ObjectRef(NShost, NSport, 1, 3, "NameService");
         return new ProxyNameService(oref);
     }
 

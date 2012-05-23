@@ -14,12 +14,20 @@ public class ObjectRef {
     // Interface id of the referenced object
     private int iid;
 
-    public ObjectRef (String host, int port, int oid, int iid) {
+    private String className;
+
+    private ObjectRef (String host, int port, int oid, int iid) {
         this.host = host;
         this.port = port;
         this.oid = oid;
         this.iid = iid;
     }
+
+    public ObjectRef (String host, int port, int oid, int iid, String className) {
+        this(host,port,oid,iid);
+        this.className = className;
+    }
+
 
     // Creates a new invocation to the referenced object
     public Invocation newInvocation () {
@@ -65,6 +73,10 @@ public class ObjectRef {
 
     public String toString(){
         return "oref: [" + getHost() + ":" + getPort() + "(oid:" + getOid() + ", iid:" + getIid() + ")]";
+    }
+
+    public String getClassName(){
+        return this.className;
     }
 
     // An ObjectInvocation represents an invocation to a remote object

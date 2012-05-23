@@ -3,6 +3,8 @@
 
 import java.io.*;
 //import java.net.*;
+import java.lang.*;
+import java.lang.reflect.*;
 
 public class ParseIn {
     // InputStream to read data from
@@ -74,8 +76,15 @@ public class ParseIn {
        //~ System.out.println ("getObject en ParseIn");
        ObjectRef or = getObjectRef();
        //~ System.out.println ("gotObjectRef: " + or);
-       //getInt();
-       //Object p = new Proxy(or);
+       try { //creacion automática de Proxies en base a la clase del objeto
+            String ProxyName = "Proxy" + or.getClassName();
+            System.out.println ("ProxyName: " + ProxyName);
+            Constructor<?>[] c = Class.forName(ProxyName).getConstructors();
+            return c[0].newInstance(or);
+       }
+       catch (Exception E){
+           System.out.println ("El experimento ha salido mal :( pasamos al método clasico)");
+       }
        switch (or.getIid()) {
             case 1:  // "A"
                 //~ System.out.println ("recibiendo A");
@@ -89,9 +98,6 @@ public class ParseIn {
             default:
                 System.out.println ("mal!!");
        }
-
-
-       //~ System.out.println("getting proxy: " + p + " on object: " + or);
        return null;
     }
 
@@ -105,9 +111,10 @@ public class ParseIn {
         int port = getInt();
         int obId = getInt();
         int iId = getInt();
+        String cls = getString();
 
         // Create and return an object reference with those values
-        ObjectRef oref = new ObjectRef(host,port,obId,iId);
+        ObjectRef oref = new ObjectRef(host,port,obId,iId,cls);
         return oref;
     }
 }
