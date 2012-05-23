@@ -48,7 +48,7 @@ public class cliente {
     public void pruebaProxyByNameService(){
         //NS = MiniORB.getNameService();
         orb = new MiniORB(hostc,portc,hostNS,portNS);
-        orb.serve();
+        //~ orb.serve();
 
 
         NS = orb.getNameService();
