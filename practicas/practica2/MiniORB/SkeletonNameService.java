@@ -1,3 +1,5 @@
+
+
 public class SkeletonNameService implements Skeleton {
     // Interface identifier for A, ClassA, etc.
     // Each class implementing Skeleton must have a different value!

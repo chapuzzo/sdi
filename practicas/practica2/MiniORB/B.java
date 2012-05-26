@@ -1,4 +1,4 @@
-// Remote interface of type "B"
+
 
 // It must be implemented by the corresponding proxy (ProxyB)
 // and server (ClassB).

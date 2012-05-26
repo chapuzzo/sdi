@@ -1,4 +1,5 @@
 
+
 public interface NameService {
     // Save an object, bound to the given name (string)
     public void bind (String s, Object o);

@@ -1,3 +1,5 @@
+
+
 // This interface must be implemented by all the skeletons
 
 public interface Skeleton {     

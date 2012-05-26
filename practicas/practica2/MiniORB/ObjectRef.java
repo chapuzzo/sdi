@@ -1,6 +1,5 @@
-// An ObjectRef is a reference to a remote object.
-// It provides methods to marshal and unmarshal data
-// (by means of the ObjectInvocation inner class)
+
+
 
 import java.net.*;
 

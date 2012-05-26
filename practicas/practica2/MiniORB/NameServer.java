@@ -1,3 +1,5 @@
+
+
 // This class is a "server" that creates a ClassA object and registers it
 // in a MiniORB.
 

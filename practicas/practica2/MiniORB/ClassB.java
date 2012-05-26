@@ -1,4 +1,4 @@
-// Implementation of the A interface
+
 
 import java.util.*;
 

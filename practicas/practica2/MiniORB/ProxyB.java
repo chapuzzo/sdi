@@ -1,4 +1,3 @@
-// TO-DO: Complete this class
 
 public class ProxyB extends Proxy implements B {
     public ProxyB (ObjectRef oref) {

@@ -1,7 +1,7 @@
-// This class is used to do the marshalling of data.
-// It writes data to an OutputStream (of some socket).
+
 
 import java.io.*;
+
 
 public class ParseOut {
     // OutputStream to write data to
@@ -56,18 +56,18 @@ public class ParseOut {
    public void putObject (Object obj) {
        //~ System.out.println ("putObject en ParseOut");
        Proxy px = null;
-       //~ System.out.println("pO->"+obj.getClass().getName());
+       System.out.println("pO->"+obj.getClass().getName());
         if (obj instanceof Proxy) {
             px = (Proxy) obj;
             //~ putObjectRef(px.oref);
         }
         else {
             try{
-                Class[] v =  obj.getClass().getInterfaces();
+                Class<?>[] v =  obj.getClass().getInterfaces();
                 for (int x = 0; x<v.length; x++){
-                    Class i = v[x];
+                    Class<?> i = v[x];
                     String SkeletonName= "Skeleton" + i.getName();
-                    Class cls = Class.forName(SkeletonName);
+                    Class<?> cls = Class.forName(SkeletonName);
                     //~ System.out.println(SkeletonName);
                     MiniORB orb = MiniORB.getOrb();
                     Skeleton sk = (Skeleton) cls.newInstance();

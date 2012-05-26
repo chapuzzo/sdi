@@ -1,6 +1,8 @@
+
+
 public interface ChatServer{
-    public void registerUser(ChatUser u);
-    public void registerChannel(ChatChannel c);
+    public void registerUser(String name, ChatUser u);
+    public void registerChannel(String name, ChatChannel c);
     public ChatUser getUser(String name);
     public ChatChannel getChannel(String name);
     //~ listChannel array en el marshall/unmarshall

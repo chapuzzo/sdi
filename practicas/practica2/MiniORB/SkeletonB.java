@@ -1,3 +1,6 @@
+
+
+
 public class SkeletonB implements Skeleton {
     // Interface identifier for B, ClassB, etc.
     // Each class implementing Skeleton must have a different value!

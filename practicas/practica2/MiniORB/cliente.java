@@ -79,7 +79,7 @@ public class cliente {
             //~ Proxy pA = orb.addObject(a,skA);
             //~ Object o = orb.getObject(pA.oref.getOid());
             pA.save("cuarentaydos", 42);
-            //pA.save("cinco", 5);
+            pA.save("cinco", 5);
             pB.save("primero",pA.load("cinco"));
             pB.save("segundo",pA.load("cuarentaydos"));
             int res = pB.add("primero","segundo");

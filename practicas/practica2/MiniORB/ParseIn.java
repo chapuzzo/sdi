@@ -1,10 +1,9 @@
-// This class is used to do the unmarshalling of data.
-// It reads data from an InputStream (of some socket).
+
+
 
 import java.io.*;
-//import java.net.*;
-import java.lang.*;
 import java.lang.reflect.*;
+
 
 public class ParseIn {
     // InputStream to read data from
