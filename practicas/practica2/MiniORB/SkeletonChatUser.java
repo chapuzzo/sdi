@@ -10,6 +10,12 @@ public class SkeletonChatUser implements Skeleton {
 		case Methods.GETNAME: {
 			String name = CU.getName();
 			parseOut.putString(name);
+			break;
+		}
+		case Methods.SENDMESSAGE: {
+			ChatMessage CM = (ChatMessage)parseIn.getObject();
+			CU.sendMessage(CM);
+			break;
 		}
 		}
 	}

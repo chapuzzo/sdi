@@ -8,9 +8,12 @@ public class SkeletonChatChannel implements Skeleton {
 		int methodNumber = parseIn.getInt();
 		switch(methodNumber){
 		case Methods.JOINUSER: {
+			System.out.println("joiningUser (sk)");
 			ChatUser user;
 			user = (ChatUser)parseIn.getObject();
+			System.out.println("joiningUser (sk) 2");
 			CC.joinUser(user);
+			System.out.println("jointUser (sk)");
 			break;
 		}
 		case Methods.LEAVEUSER: {
@@ -20,14 +23,17 @@ public class SkeletonChatChannel implements Skeleton {
 			break;
 		}
 		case Methods.SENDMESSAGE: {
+			System.out.println("sendingMessage (sk)");
 			ChatMessage message;
 			message = (ChatMessage)parseIn.getObject();
 			CC.sendMessage(message);
+			System.out.println("sentMessage (sk)");
 			break;
 		}
 		case Methods.GETNAME: {
 			String name = CC.getName();
 			parseOut.putString(name);
+			break;
 		}
 		}
 

@@ -1,6 +1,3 @@
-
-
-
 public class ProxyNameService extends Proxy implements NameService{
 
     public static final int BIND = 1;
@@ -24,9 +21,9 @@ public class ProxyNameService extends Proxy implements NameService{
         Invocation invo = oref.newInvocation();
         invo.putInt(RESOLVE);
         invo.putString(s);
-        Object or = invo.getObject();
+        Object o = invo.getObject();
         invo.waitEnd();
-        return or;
+        return o;
     }
 
 }

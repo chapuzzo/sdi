@@ -71,7 +71,8 @@ public class ObjectRef {
     }
 
     public String toString(){
-        return "oref: [" + getHost() + ":" + getPort() + "(oid:" + getOid() + ", iid:" + getIid() + ")]";
+        return "oref: [" + getHost() + ":" + getPort() + "(oid:" + getOid() +
+        		", iid:" + getIid() + ", iName:" + getInterfaceName() + ")]";
     }
 
     public String getInterfaceName(){

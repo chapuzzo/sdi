@@ -11,4 +11,9 @@ public class ChatMessageClass implements ChatMessage{
         return this.message;
     }
 
+	
+	public void setText(String text) {
+		this.message = text;
+	}
+
 }

@@ -1,7 +1,4 @@
-
-
 import java.util.ArrayList;
-
 
 public class ChatChannelClass implements ChatChannel{
 
@@ -13,23 +10,31 @@ public class ChatChannelClass implements ChatChannel{
     }
 
     public void joinUser(ChatUser u){
+    	System.out.println("CCC: joining user");
         users.add(u);
-        for (ChatUser cu: users){
+        //u.sendMessage(new ChatMessageClass("hola"));
+        System.out.println("CCC: joint user");
+        /*for (ChatUser cu: users){
             cu.sendMessage(new ChatMessageClass("-> user " + u.getName() + " joins #" + getName()));
-        }
+        }*/
+        System.out.println("CCC: bc users");
     }
 
     public void leaveUser(ChatUser u){
         users.remove(u);
-        for (ChatUser cu: users){
+        /*for (ChatUser cu: users){
             cu.sendMessage(new ChatMessageClass("-> user " + u.getName() + " leaves #" + getName()));
-        }
+        }*/
     }
 
     public void sendMessage(ChatMessage m){
-        for (ChatUser cu: users){
+    	System.out.println("sending message(CC)");
+    	for (int i = 0; i < users.size(); i++) {
+			users.get(i).sendMessage(m);
+		}
+        /*for (ChatUser cu: users){
             cu.sendMessage(m);
-        }
+        }*/
     }
 
     public String getName(){

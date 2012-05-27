@@ -54,11 +54,13 @@ public class ParseOut {
     }
 
    public void putObject (Object obj) {
-       //~ System.out.println ("putObject en ParseOut");
+       System.out.print ("pO: ");
        Proxy px = null;
-       System.out.println("pO->"+obj.getClass().getName());
+       //* //System.out.println("pO->"+obj.getClass().getInterfaces()[0].getName());
         if (obj instanceof Proxy) {
-            px = (Proxy) obj;
+        	//* //System.out.println("YA es un proxy");
+        	px = (Proxy) obj;
+        	//System.out.println(px);
             //~ putObjectRef(px.oref);
         }
         else {
@@ -74,6 +76,8 @@ public class ParseOut {
                     px = orb.addObject (obj, sk);
                     //~ System.out.println("Putting Object: " + px.oref);
                     //~ putObjectRef(px.oref);
+                    //* //System.out.println("NO era un proxy");
+                    //System.out.println(px);
                 }
             }
             catch(Exception E){
@@ -81,6 +85,7 @@ public class ParseOut {
             }
         }
         putObjectRef(px.oref);
+        System.out.println(px);
         //~ System.out.println ("Object put");
     }
 

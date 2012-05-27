@@ -1,5 +1,4 @@
 
-
 // This class must be extended by all the proxies
 
 public class Proxy {
@@ -7,5 +6,9 @@ public class Proxy {
 
 	public Proxy (ObjectRef oref) {
 		this.oref = oref;
+	}
+	
+	public String toString(){
+		return oref.toString();		
 	}
 }

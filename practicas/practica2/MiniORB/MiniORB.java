@@ -142,7 +142,7 @@ public class MiniORB implements Runnable {
         // Look for the skeleton in the table of skeletons
         sk = getInterface(iid);
 
-        //~ System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: " + obj + ", sk: " + sk);
+        //System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: " + obj + ", sk: " + sk);
         // The skeleton knows how to attend the request
         sk.upcall(pin, pou, obj);
 

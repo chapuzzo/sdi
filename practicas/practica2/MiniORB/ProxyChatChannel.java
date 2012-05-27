@@ -6,19 +6,38 @@ public class ProxyChatChannel extends Proxy implements ChatChannel{
 	}
 
 	public void joinUser(ChatUser u) {
-		
+		Invocation invo = oref.newInvocation();
+		invo.putInt(Methods.JOINUSER);
+		System.out.println("A");
+		invo.putObject(u);
+		System.out.println("B");
+		invo.waitEnd();
+		System.out.println("C");
+		return;
 	}
 
 	public void leaveUser(ChatUser u) {
-		
+		Invocation invo = oref.newInvocation();
+		invo.putInt(Methods.LEAVEUSER);
+		invo.putObject(u);
+		invo.waitEnd();
+		return;
 	}
 
 	public void sendMessage(ChatMessage m) {
-		
+		Invocation invo = oref.newInvocation();
+		invo.putInt(Methods.SENDMESSAGE);
+		invo.putObject(m);
+		invo.waitEnd();
+		return;
 	}
 
 	public String getName() {
-		return null;
+		Invocation invo = oref.newInvocation();
+		invo.putInt(Methods.GETNAME);
+		String name = invo.getString();
+		invo.waitEnd();	
+		return name;
 	}
 
 }

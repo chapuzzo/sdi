@@ -28,6 +28,7 @@ public class ProxyChatServer extends Proxy implements ChatServer{
 		invo.putInt(Methods.GETUSER);
 		invo.putString(name);
 		ChatUser u = (ChatUser)invo.getObject();
+		invo.waitEnd();
 		return u;
 	}
 
@@ -36,6 +37,7 @@ public class ProxyChatServer extends Proxy implements ChatServer{
 		invo.putInt(Methods.GETCHANNEL);
 		invo.putString(name);
 		ChatChannel c = (ChatChannel)invo.getObject();
+		invo.waitEnd();
 		return c;
 	}
 

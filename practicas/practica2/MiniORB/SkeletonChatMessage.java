@@ -9,7 +9,13 @@ public class SkeletonChatMessage implements Skeleton {
 		switch(methodNumber){
 		case Methods.GETTEXT: {
 			String message = CM.getText();
-			parseOut.putString(message);			
+			parseOut.putString(message);
+			break;
+		}
+		case Methods.SETTEXT: {
+			String text = parseIn.getString();
+			CM.setText(text);
+			break;
 		}
 		}
 	}
