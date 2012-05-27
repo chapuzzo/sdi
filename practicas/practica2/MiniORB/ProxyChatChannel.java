@@ -8,11 +8,8 @@ public class ProxyChatChannel extends Proxy implements ChatChannel{
 	public void joinUser(ChatUser u) {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.JOINUSER);
-		System.out.println("A");
 		invo.putObject(u);
-		System.out.println("B");
 		invo.waitEnd();
-		System.out.println("C");
 		return;
 	}
 

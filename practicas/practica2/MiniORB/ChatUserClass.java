@@ -1,10 +1,11 @@
 
-
 public class ChatUserClass implements ChatUser{
     String name;
+    String prompt = "Escribe tu mensaje -> ";
 
     public ChatUserClass(String name){
         this.name = name;
+        System.out.print(prompt);
     }
 
     public String getName(){
@@ -12,6 +13,9 @@ public class ChatUserClass implements ChatUser{
     }
 
     public void sendMessage(ChatMessage m){
-        System.out.println(m.getText());
+    	int i = 80;
+    	while (i-- > 0) System.out.print("\b \b");
+        System.out.println("\r" + m.getText());
+        System.out.print(prompt);
     }
 }

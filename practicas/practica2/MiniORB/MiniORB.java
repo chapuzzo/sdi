@@ -22,6 +22,9 @@ public class MiniORB implements Runnable {
     private int NSport;
 
     private static MiniORB orb;
+    
+    private Thread orb_t;
+    private boolean stop = false;
 
     public MiniORB (String host, int port) {
         objects = new Hashtable<Integer,Object>();
@@ -83,7 +86,8 @@ public class MiniORB implements Runnable {
     public void serve () {
         // Create a new thread and start it
         // See the run() method!
-        new Thread(this).start();
+        orb_t = new Thread(this);
+        orb_t.start();
     }
 
     public void run () {
@@ -105,7 +109,7 @@ public class MiniORB implements Runnable {
         }
 
         // Wait for requests from clients
-        while (true) {
+        while (!stop) {
             try {
                 // Accept a new request from a client
                 clientSocket = serverSocket.accept();
@@ -177,4 +181,14 @@ public class MiniORB implements Runnable {
     public static MiniORB getOrb(){
         return orb;
     }
+
+	public void stop() {
+		try {
+			stop = true;
+			orb_t.join(200);
+		}
+		catch (Exception e) {
+			System.out.println("excepción en stop!!!");
+		}
+	}
 }

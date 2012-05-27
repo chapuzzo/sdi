@@ -1,8 +1,10 @@
+import java.io.*;
+
 
 public class ChatClient {
 
 	
-	 String hostc, hostNS;
+	 	String hostc, hostNS;
 	    int portc, portNS, oid = 0, iid = 0;
 	    MiniORB orb = null;
 	    NameService NS = null;
@@ -12,32 +14,44 @@ public class ChatClient {
 
 	        if (! c.parseArgs(args)){
 	            System.err.println(
-	                "uso:\n\t $ java ChatClient <hostc> <portc> <hostNS> <portNS> //[oid] [iid]"
+	                "uso:\n\t $ java ChatClient <host> <port> <hostNS> <portNS>"
 	                );
 	        }
 	        else
-	            c.pruebaChat();
+	            c.pruebaChatClient();
 	    }
 
 
-	    public void pruebaChat(){
+	    public void pruebaChatClient(){
+	    	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	    	PrintStream out = new PrintStream(System.out);
+	    	
 	        orb = new MiniORB(hostc,portc,hostNS,portNS);
 	        orb.serve();
 
 	        NS = orb.getNameService();
 	        try{
-	        	//ChatServer CS = (ChatServer)NS.resolve("cs1");
-	        	ChatChannel CC = (ChatChannel)NS.resolve("cc1");
-	        	ChatUser CU = new ChatUserClass("luis");
-	        	ChatMessage CM = (ChatMessage)NS.resolve("cm1");
-	        	
-	        	NS.bind("u1", CU);
-	        	//NS.bind("cm1", CM);
-	        	
-	        	ChatUser pCU = (ChatUser)NS.resolve("u1");
-	        	//ChatMessage pCM = (ChatMessage)NS.resolve("cm1");
-	        	CC.joinUser(pCU);
-	        	CC.sendMessage(CM);
+	        	out.println("Escribe un nombre de usuario: ");
+	        	String user = in.readLine();
+	        	ChatUser pCU,CU = new ChatUserClass(user);
+	        	ChatServer CS = (ChatServer)NS.resolve("cs");
+	        	if (CS.getUser(CU.getName()) == null)//{
+	        		CS.registerUser(CU.getName(), CU);
+	        		//pCU = (ChatUser)CS.getUser(CU.getName());
+	        	//}
+	        	//else
+	        	//{
+	        		//pCU = (ChatUser)CS.getUser(CU.getName());
+	        	//}
+	        	ChatChannel CC = CS.getChannel("cc");
+	        	CC.joinUser(CU);
+	        	String message = "";
+	        	while (!message.equals("fin")){
+	        		message = in.readLine();
+		        	CC.sendMessage(new ChatMessageClass(CU.getName() +"> "+ message));	        		
+	        	}
+	        	CC.leaveUser(CU);
+	        	System.exit(0);
 	        }
 	        catch(Exception E){
 	            E.printStackTrace();

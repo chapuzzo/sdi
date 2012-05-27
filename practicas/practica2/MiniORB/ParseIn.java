@@ -1,9 +1,6 @@
 
-
-
 import java.io.*;
 import java.lang.reflect.*;
-
 
 public class ParseIn {
     // InputStream to read data from
@@ -72,16 +69,17 @@ public class ParseIn {
 
     public Object getObject () {
        //System.out.println ("Ojooooo!! : has de implmementar estoooo");
-       System.out.print ("gO: ");
+       //System.out.print ("gO: ");
        ObjectRef or = getObjectRef();
-       //~ System.out.println ("gotObjectRef: " + or);
+       if (or.getIid() == 0 && or.getOid() == 0) return null;
+       //System.out.println ("gotObjectRef: " + or);
        try { //creacion automática de Proxies en base a la clase del objeto
             String ProxyName = "Proxy" + or.getInterfaceName();
-            //~ System.out.println ("ProxyName: " + ProxyName);
+            //System.out.println ("ProxyName: " + ProxyName);
             Constructor<?>[] c = Class.forName(ProxyName).getConstructors();
             Object o = c[0].newInstance(or);
-            //* // System.out.println("gO->"+o.getClass().getInterfaces()[0].getName());
-            System.out.println(o);
+            //System.out.println("gO->"+o.getClass().getInterfaces()[0].getName());
+            //System.out.println(o);
             return o;
        }
        catch (Exception E){
@@ -110,10 +108,15 @@ public class ParseIn {
         // 3) Object id
         // 4) Interface id
         String host = getString();
+        //System.out.println ("gotHost: " + host);
         int port = getInt();
+        //System.out.println ("gotPort: " + port);
         int obId = getInt();
+        //System.out.println ("gotOid: " + obId);
         int iId = getInt();
+        //System.out.println ("gotIid: " + iId);
         String cls = getString();
+        //System.out.println ("gotIname: " + cls);
 
         // Create and return an object reference with those values
         ObjectRef oref = new ObjectRef(host,port,obId,iId,cls);

@@ -7,9 +7,9 @@ public class ProxyChatMessage extends Proxy implements ChatMessage{
 	public String getText() {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.GETTEXT);
-		ChatMessage CM = (ChatMessage)invo.getObject();
+		String text = invo.getString();
 		invo.waitEnd();
-		return CM.getText();
+		return text;
 	}
 
 	public void setText(String text) {

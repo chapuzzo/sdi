@@ -1,76 +1,87 @@
 
 public class ServerChat {
 	
-	public static void main(String[] args) {
-		String host, NShost;
-	    int port, NSport;
-		MiniORB orb = null;
-		
-		if (args.length != 4) {
-            System.err.println("Invalid arguments");
-            System.err.println();
-            System.err.println("java ServerChat <host> <port>  <NShost> <NSport>");
-            return;
+	String hostc, hostNS;
+    int portc, portNS, oid = 0, iid = 0;
+    MiniORB orb = null;
+    NameService NS = null;
+
+    public static void main (String args[]) {
+        ServerChat sc = new ServerChat();
+
+        if (! sc.parseArgs(args)){
+            System.err.println(
+                "uso:\n\t $ java ServerChat <host> <port> <hostNS> <portNS>"
+                );
+        }
+        else
+            sc.pruebaServerChat();
+    }
+
+
+    public void pruebaServerChat(){
+        orb = new MiniORB(hostc,portc,hostNS,portNS);
+        orb.serve();
+
+        NS = orb.getNameService();
+        try{
+        	ChatServer CS = new ChatServerClass();
+        	ChatChannel CC = new ChatChannelClass("cc");
+        	CS.registerChannel("cc", CC);
+        	NS.bind("cs", CS);        	
+        	
+        }
+        catch(Exception E){
+            E.printStackTrace();
         }
 
-        // Get the address (e.g IP address or host name)
-        host = args[0];
 
-        // Get the port number for the MiniORB
+    }
+
+    public boolean parseArgs(String args[]){
+
+        if (args.length < 4){
+            System.err.println("Invalid argument number: " + args.length);
+            return false;
+        }
+
+        hostc = args[0];
+
         try {
-            port = (new Integer(args[1])).intValue();
+            portc = (new Integer(args[1])).intValue();
         } catch (Exception e) {
             System.err.println("Invalid port number: " + args[1]);
-            return;
+            return false;
         }
 
-         // Get the address (e.g IP address or host name)
-        NShost = args[2];
+        hostNS = args[2];
 
-        // Get the port number for the MiniORB
         try {
-            NSport = (new Integer(args[3])).intValue();
+            portNS = (new Integer(args[3])).intValue();
         } catch (Exception e) {
             System.err.println("Invalid port number: " + args[3]);
-            return;
+            return false;
         }
 
+        if (args.length > 4)
+        try {
+            oid = (new Integer(args[4])).intValue();
+        } catch (Exception e) {
+            System.err.println("Invalid oid number: " + args[4]);
+            return false;
+        }
 
-        // Create and start the MiniORB
-        orb = new MiniORB(host, port, NShost, NSport);
-        orb.serve();
-        
-        NameService NS = orb.getNameService();
-        
-        ChatServer CS = new ChatServerClass();
-        //SkeletonChatServer SkCS = new SkeletonChatServer();
-        
-        ChatChannel CC = new ChatChannelClass("prueba");
-        //SkeletonChatChannel SkCC = new SkeletonChatChannel();
-        
-        //ChatUser CU = new ChatUserClass("luis");
-        //SkeletonChatUser SkCU = new SkeletonChatUser();
-        
-        ChatMessage CM = new ChatMessageClass("x-x-x");
-        //SkeletonChatMessage SkCM = new SkeletonChatMessage();
-        
-        //orb.addObject(CS, SkCS);
-        //orb.addObject(CC, SkCC);
-       // orb.addObject(CU, SkCU);
-       // orb.addObject(CM, SkCM);
-        
-        NS.bind("cs1", CS);
-        NS.bind("cc1", CC);
-        NS.bind("cm1", CM);
-        
-        
-        //CS.registerChannel("cc1", CC);
-        
-        //CC.joinUser(CU);
-        //CC.sendMessage(CM);
-        
-        //CS.registerChannel(CC.getName(), CC);
+        if (args.length > 5)
+        try {
+            iid = (new Integer(args[5])).intValue();
+        } catch (Exception e) {
+            System.err.println("Invalid iid number: " + args[5]);
+            return false;
+        }
 
-	}
+        return true;
+
+    }
+
 
 }

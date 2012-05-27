@@ -1,7 +1,5 @@
 
-
 import java.io.*;
-
 
 public class ParseOut {
     // OutputStream to write data to
@@ -54,9 +52,13 @@ public class ParseOut {
     }
 
    public void putObject (Object obj) {
-       System.out.print ("pO: ");
+       //System.out.print ("pO: ");
        Proxy px = null;
        //* //System.out.println("pO->"+obj.getClass().getInterfaces()[0].getName());
+       	if (obj == null ) {
+       		px = new Proxy(new ObjectRef(" ", 0, 0, 0, " "));
+       	}
+       	else
         if (obj instanceof Proxy) {
         	//* //System.out.println("YA es un proxy");
         	px = (Proxy) obj;
@@ -85,7 +87,7 @@ public class ParseOut {
             }
         }
         putObjectRef(px.oref);
-        System.out.println(px);
+        //System.out.println(px);
         //~ System.out.println ("Object put");
     }
 
@@ -93,15 +95,21 @@ public class ParseOut {
         try {
             // Write the address of the ORB that stores the object
             putString(oref.getHost());
+            //System.out.println("Put Host");
             // Write the port of the ORB that stores the object
             putInt(oref.getPort());
+            //System.out.println("Put Port");
             // Write the object id of the object
             putInt(oref.getOid());
+            //System.out.println("Put Oid");
             // Write the interface id of the object
             putInt(oref.getIid());
-
+            //System.out.println("Put Iid");
             putString(oref.getInterfaceName());
+            //System.out.println("Put iName");
         } catch (Exception ioe) {
+        	System.out.println("ieeep!! ALTO AHI!!");
+        	ioe.printStackTrace();
         }
     }
 }
