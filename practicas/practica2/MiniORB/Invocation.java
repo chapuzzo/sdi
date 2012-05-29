@@ -20,6 +20,7 @@ public interface Invocation {
 	public boolean getBool ();
 	public String getString ();
 	public Object getObject ();
-
-	public void waitEnd ();    
+	public MiniORBException getException();   
+	public void waitEnd ();
+	 
 }

@@ -9,7 +9,11 @@ public class ProxyChatUser extends Proxy implements ChatUser{
         Invocation invo = oref.newInvocation();
         invo.putInt(Methods.GETNAME);
         String name = invo.getString();
-        invo.waitEnd();
+        int retVal = invo.getInt();
+        if (retVal != 0){
+        	MiniORBException e = invo.getException();
+        	throw e;
+        }
         return name;
     }
 
@@ -18,6 +22,11 @@ public class ProxyChatUser extends Proxy implements ChatUser{
         invo.putInt(Methods.SENDMESSAGE);
         invo.putObject(m);
         invo.waitEnd();
+        int retVal = invo.getInt();
+        if (retVal != 0){
+        	MiniORBException e = invo.getException();
+        	throw e;
+        }
         return;
     }
 
