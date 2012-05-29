@@ -64,7 +64,7 @@ public class ObjectRef {
 
 	public String toString() {
 		return "oref: [" + getHost() + ":" + getPort() + "(oid:" + getOid()
-				+ ", iid:" + getIid() + "]";
+				+ ", iid:" + getIid() + ")]";
 	}
 
 	// An ObjectInvocation represents an invocation to a remote object
@@ -126,15 +126,17 @@ public class ObjectRef {
 		public Object getObject() {
 			return parseIn.getObject();
 		}
-		
-		public MiniORBException getException(){
+
+		public MiniORBException getException() {
 			return parseIn.getException();
 		}
 
 		// waitEnd is used to finish receiving parameters
 		// It receives the "0" send by the multiplexer method (MiniORB)
 		public void waitEnd() {
-			parseIn.getInt();
+			int retVal = parseIn.getInt();
+			if (retVal != 0)
+				throw getException();
 		}
 	}
 }

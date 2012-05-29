@@ -1,4 +1,4 @@
-*   1- soporte a excepciones y objetos nulos --
+*   1- soporte a excepciones y objetos nulos ?-
 *   2- soporte a vectores de objetos  xx
 *   3- registro automático de objetos xx
 **  4- multiples interfaces

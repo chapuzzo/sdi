@@ -1,5 +1,4 @@
-
-public class ProxyChatChannel extends Proxy implements ChatChannel{
+public class ProxyChatChannel extends Proxy implements ChatChannel {
 
 	public ProxyChatChannel(ObjectRef oref) {
 		super(oref);
@@ -33,7 +32,7 @@ public class ProxyChatChannel extends Proxy implements ChatChannel{
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.GETNAME);
 		String name = invo.getString();
-		invo.waitEnd();	
+		invo.waitEnd();
 		return name;
 	}
 

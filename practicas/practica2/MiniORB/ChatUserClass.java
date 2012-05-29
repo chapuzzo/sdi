@@ -12,9 +12,9 @@ public class ChatUserClass implements ChatUser {
 	}
 
 	public void sendMessage(ChatMessage m) {
-		int i = 80;
-		while (i-- > 0)
-			System.out.print("\b \b");
+		
+		int i = 80; while (i-- > 0) System.out.print("\b \b");
+		
 		System.out.println("\r" + m.getText());
 		System.out.print(prompt);
 	}

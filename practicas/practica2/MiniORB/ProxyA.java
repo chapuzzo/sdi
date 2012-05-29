@@ -8,8 +8,7 @@ public class ProxyA extends Proxy implements A {
 		invo.putInt(1);
 		invo.putString(s);
 		invo.putInt(i);
-		invo.getInt();
-
+		invo.waitEnd();
 		return;
 	}
 
@@ -19,7 +18,6 @@ public class ProxyA extends Proxy implements A {
 		invo.putString(s);
 		int ret = invo.getInt();
 		invo.waitEnd();
-
 		return ret;
 	}
 }

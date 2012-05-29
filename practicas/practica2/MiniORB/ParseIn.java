@@ -69,20 +69,25 @@ public class ParseIn {
 
 	public Object getObject() {
 		ObjectRef or = getObjectRef();
+
+		
 		try {
 			if (or.getOid() == 0)
 				throw new MiniORBException("returnedNull");
+			// return null;
 			// creación automática de Proxies en base a la clase del objeto
 			String ProxyName = "Proxy" + or.getIid();
 			Class<ObjectRef> obclass = ObjectRef.class;
 			Constructor<?> c = Class.forName(ProxyName).getConstructor(obclass);
 			Object o = c.newInstance(or);
+			// System.out.println(o);
 			return o;
 		} catch (MiniORBException MIOE) {
 			System.out.println(MIOE.getMessage());
 			return null;
 		} catch (Exception E) {
 			System.out.println("cannot getObject!!");
+			System.out.println(E.getStackTrace());
 			return null;
 		}
 	}
@@ -95,13 +100,9 @@ public class ParseIn {
 			// 3) Object id
 			// 4) Interface id
 			String host = getString();
-			// System.out.println ("gotHost: " + host);
 			int port = getInt();
-			// System.out.println ("gotPort: " + port);
 			int obId = getInt();
-			// System.out.println ("gotOid: " + obId);
 			String iId = getString();
-			// System.out.println ("gotIid: " + iId);
 
 			// Create and return an object reference with those values
 			ObjectRef oref = new ObjectRef(host, port, obId, iId);

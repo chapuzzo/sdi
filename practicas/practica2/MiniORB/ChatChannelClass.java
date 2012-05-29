@@ -26,25 +26,36 @@ public class ChatChannelClass implements ChatChannel {
 		if (userstable.containsKey(u.getName())) {
 			userstable.remove(u.getName());
 			for (ChatUser cu : userstable.values()) {
-				cu.sendMessage(new ChatMessageClass("-> user " + u.getName()
-						+ " leaves #" + getName()));
-				System.out.println(cu);
+				broadcastLeaving(cu.getName());
 			}
 		}
 	}
 
 	public void sendMessage(ChatMessage m) {
-		Vector<ChatUser> fallidos = new Vector<ChatUser>();
-		for (ChatUser cu : userstable.values()) {
+		Vector<String> fallidos = new Vector<String>();		
+		for (String uname : userstable.keySet()) {
 			try {
-				cu.sendMessage(m);
-				System.out.println(cu);
+				userstable.get(uname).sendMessage(m);
 			} catch (Exception E) {
-				fallidos.add(cu);
+				fallidos.add(uname);
 			}
 		}
-		for (ChatUser cu : fallidos)
-			leaveUser(cu);
+		for (String uname : fallidos) {
+			try {
+				leaveUser(userstable.get(uname));
+			} catch (Exception E) {
+				System.out.println("realmente " + uname + " se ha ido , lo borro");
+				userstable.remove(uname);
+				broadcastLeaving(uname);
+			/*} finally {*/
+				
+			}
+		}
+	}
+
+	private void broadcastLeaving(String uname) {
+		sendMessage(new ChatMessageClass("-> user " + uname
+				+ " leaves #" + getName()));
 	}
 
 	public String getName() {

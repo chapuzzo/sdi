@@ -1,4 +1,3 @@
-
 public interface ChatChannel {
 	public void joinUser(ChatUser u);
 

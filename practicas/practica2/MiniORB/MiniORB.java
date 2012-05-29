@@ -25,9 +25,9 @@ public class MiniORB implements Runnable {
 	private boolean stop = false;
 
 	public MiniORB(String host, int port) {
-		objects = new Hashtable<Integer, Object>();
-		skeletons = new Hashtable<String, Skeleton>();
-		objCount = 0;
+		this.objects = new Hashtable<Integer, Object>();
+		this.skeletons = new Hashtable<String, Skeleton>();
+		this.objCount = 0;
 		this.host = host;
 		this.port = port;
 		orb = this;
@@ -147,8 +147,9 @@ public class MiniORB implements Runnable {
 		// Look for the skeleton in the table of skeletons
 		sk = getInterface(iid);
 
-		// TODO: System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: "
-		// + obj + ", sk: " + sk);
+		// TODO:
+		// System.out.println("oid: " + oid + ", iid: " + iid + ", obj: " + obj
+		// + ", sk: " + sk);
 		// The skeleton knows how to attend the request
 		sk.upcall(pin, pou, obj);
 

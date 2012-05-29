@@ -14,7 +14,6 @@ public class ProxyNameService extends Proxy implements NameService {
 		invo.putObject(o);
 		invo.waitEnd();
 		return;
-
 	}
 
 	public Object resolve(String s) {

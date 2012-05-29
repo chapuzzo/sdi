@@ -71,9 +71,10 @@ public class ParseOut {
 					MiniORB orb = MiniORB.getOrb();
 					Skeleton sk = (Skeleton) cls.newInstance();
 					px = orb.addObject(obj, sk);
+					//System.out.println(px);
 				}
 			} catch (Exception E) {
-				System.out.println(E.getMessage());
+				//System.out.println(E.getMessage());
 				throw new MiniORBException("cannot putObject!!");
 			}
 		}
@@ -84,19 +85,16 @@ public class ParseOut {
 		try {
 			// Write the address of the ORB that stores the object
 			putString(oref.getHost());
-			// System.out.println("Put Host");
 			// Write the port of the ORB that stores the object
 			putInt(oref.getPort());
-			// System.out.println("Put Port");
 			// Write the object id of the object
 			putInt(oref.getOid());
-			// System.out.println("Put Oid");
 			// Write the interface id of the object
 			putString(oref.getIid());
-			// System.out.println("Put Iid");
 		} catch (Exception ioe) {
 			System.out.println("ieeep!! ALTO AHI!!");
 			ioe.printStackTrace();
+			throw new MiniORBException("cannot putObjectRef!!");
 		}
 	}
 

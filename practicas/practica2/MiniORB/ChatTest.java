@@ -1,32 +1,29 @@
 
+public class ChatTest {
 
-public class ChatTest{
+	public static void main(String[] args) {
+		ChatTest test = new ChatTest();
+		test.go();
+	}
 
-    public static void main(String[] args){
-        ChatTest test = new ChatTest();
-        test.go();
-    }
+	public void go() {
 
-    public void go(){
+		ChatServiceClass CS = new ChatServiceClass();
+		ChatChannelClass CC = new ChatChannelClass("unico"); // único, ya que de
+																// momento sólo
+																// hay un canal
+		ChatUserClass CU = new ChatUserClass("luis");
+		ChatUserClass CP = new ChatUserClass("pepe");
 
-        ChatServerClass CS = new ChatServerClass();
-        ChatChannelClass CC = new ChatChannelClass("unico");    //único, ya que de momento sólo hay un canal
-        ChatUserClass CU = new ChatUserClass("luis");
-        ChatUserClass CP = new ChatUserClass("pepe");
+		CS.registerChannel(CC.getName(), CC);
+		CS.registerUser(CU.getName(), CU);
+		CS.registerUser(CP.getName(), CP);
 
-        CS.registerChannel(CC.getName(), CC);
-        CS.registerUser(CU.getName(), CU);
-        CS.registerUser(CP.getName(), CP);
+		CC.joinUser(CU);
+		CC.joinUser(CP);
+		CC.sendMessage(new ChatMessageClass(CU.getName() + "> " + "hola"));
+		CC.leaveUser(CU);
 
-        CC.joinUser(CU);
-        CC.joinUser(CP);
-        CC.sendMessage(new ChatMessageClass(CU.getName() + "> " + "hola"));
-        CC.leaveUser(CU);
-
-
-
-    }
-
-
+	}
 
 }
