@@ -1,5 +1,4 @@
-
-public class Methods{
+public class Methods {
 	public static final int REGISTERUSER = 1;
 	public static final int REGISTERCHANNEL = 2;
 	public static final int GETUSER = 3;

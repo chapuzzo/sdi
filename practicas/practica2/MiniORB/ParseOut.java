@@ -99,4 +99,8 @@ public class ParseOut {
 			ioe.printStackTrace();
 		}
 	}
+
+	public void putException(MiniORBException MIOE) {
+		putString(MIOE.getMessage());
+	}
 }

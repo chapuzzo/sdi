@@ -128,7 +128,7 @@ public class ObjectRef {
 		}
 		
 		public MiniORBException getException(){
-			return parseIn.get
+			return parseIn.getException();
 		}
 
 		// waitEnd is used to finish receiving parameters

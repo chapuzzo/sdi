@@ -5,7 +5,7 @@ public class ProxyChatUser extends Proxy implements ChatUser{
         super(oref);
     }
 
-    public String getName() {
+	public String getName() {
         Invocation invo = oref.newInvocation();
         invo.putInt(Methods.GETNAME);
         String name = invo.getString();

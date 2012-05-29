@@ -1,6 +1,5 @@
+public interface ChatUser {
+	public String getName();
 
-
-public interface ChatUser{
-    public String getName();
-    public void sendMessage(ChatMessage m);
+	public void sendMessage(ChatMessage m);
 }

@@ -1,5 +1,4 @@
 
-
 // The putXYZ methods are used to send parameters (marshalling).
 // The send method must be used to end the sending.
 
@@ -7,20 +6,30 @@
 // The waitEnd method must be used to end the reception.
 
 public interface Invocation {
-	public void putInt (int i);
-	public void putLong (long i);
-	public void putBool (boolean b);
-	public void putString (String s);
-	public void putObject (Object obj);
+	public void putInt(int i);
 
-	public void send ();
+	public void putLong(long i);
 
-	public int getInt ();
-	public long getLong ();
-	public boolean getBool ();
-	public String getString ();
-	public Object getObject ();
-	public MiniORBException getException();   
-	public void waitEnd ();
-	 
+	public void putBool(boolean b);
+
+	public void putString(String s);
+
+	public void putObject(Object obj);
+
+	public void send();
+
+	public int getInt();
+
+	public long getLong();
+
+	public boolean getBool();
+
+	public String getString();
+
+	public Object getObject();
+
+	public MiniORBException getException();
+
+	public void waitEnd();
+
 }

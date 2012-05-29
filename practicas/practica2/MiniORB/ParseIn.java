@@ -81,8 +81,7 @@ public class ParseIn {
 		} catch (MiniORBException MIOE) {
 			System.out.println(MIOE.getMessage());
 			return null;
-		}
-		catch (Exception E) {
+		} catch (Exception E) {
 			System.out.println("cannot getObject!!");
 			return null;
 		}
@@ -112,5 +111,11 @@ public class ParseIn {
 			System.out.println(MIOE.getMessage());
 			return null;
 		}
+	}
+
+	public MiniORBException getException() {
+		String message = getString();
+		MiniORBException MIOE = new MiniORBException(message);
+		return MIOE;
 	}
 }
