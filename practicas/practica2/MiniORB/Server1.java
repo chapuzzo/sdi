@@ -48,14 +48,14 @@ public class Server1 {
 
         // Create "remote" objects and their corresponding skeletons
         ClassA objA = new ClassA();
-        SkeletonA skA = new SkeletonA();
+        //SkeletonA skA = new SkeletonA();
         //~ ClassB objB = new ClassB();
         //~ SkeletonB skB = new SkeletonB();
         // ...
 
         // Register the object (and its skeleton) in the ORB
         // TO-DO Which are its object id and interface id?
-        orb.addObject(objA, skA);
+        //orb.addObject(objA, skA);
         //B b = (B) orb.addObject(objB, skB);
 
 

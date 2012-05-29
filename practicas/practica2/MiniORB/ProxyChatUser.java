@@ -1,24 +1,24 @@
 
 public class ProxyChatUser extends Proxy implements ChatUser{
 
-	public ProxyChatUser(ObjectRef oref) {
-		super(oref);
-	}
+    public ProxyChatUser(ObjectRef oref) {
+        super(oref);
+    }
 
-	public String getName() {
-		Invocation invo = oref.newInvocation();
-		invo.putInt(Methods.GETNAME);
-		String name = invo.getString();
-		invo.waitEnd();
-		return name;
-	}
+    public String getName() {
+        Invocation invo = oref.newInvocation();
+        invo.putInt(Methods.GETNAME);
+        String name = invo.getString();
+        invo.waitEnd();
+        return name;
+    }
 
-	public void sendMessage(ChatMessage m) {
-		Invocation invo = oref.newInvocation();
-		invo.putInt(Methods.SENDMESSAGE);
-		invo.putObject(m);
-		invo.waitEnd();
-		return;
-	}
+    public void sendMessage(ChatMessage m) {
+        Invocation invo = oref.newInvocation();
+        invo.putInt(Methods.SENDMESSAGE);
+        invo.putObject(m);
+        invo.waitEnd();
+        return;
+    }
 
 }

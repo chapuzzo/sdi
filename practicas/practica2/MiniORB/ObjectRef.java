@@ -11,21 +11,21 @@ public class ObjectRef {
     // Object id of the referenced object
     private int oid;
     // Interface id of the referenced object
-    private int iid;
+    private String iid;
 
-    private String interfaceName;
+    //private String interfaceName;
 
-    private ObjectRef (String host, int port, int oid, int iid) {
+    public ObjectRef (String host, int port, int oid, String iid) {
         this.host = host;
         this.port = port;
         this.oid = oid;
         this.iid = iid;
     }
 
-    public ObjectRef (String host, int port, int oid, int iid, String interfaceName) {
+    /*public ObjectRef (String host, int port, int oid, int iid, String interfaceName) {
         this(host,port,oid,iid);
         this.interfaceName = interfaceName;
-    }
+    }*/
 
 
     // Creates a new invocation to the referenced object
@@ -40,8 +40,9 @@ public class ObjectRef {
         } catch (Exception e) {
             System.out.println("I can't create a socket against " +
                 host + ":" + port);
-            e.printStackTrace();
-            return null;
+            /*e.printStackTrace();
+            return null;*/
+            throw new MiniORBException("no se puede conectar");
         }
 
         // Create a new invocation
@@ -49,7 +50,7 @@ public class ObjectRef {
         // Write the object id
         invocation.putInt(oid);
         // Write the interface id
-        invocation.putInt(iid);
+        invocation.putString(iid);
 
         return invocation;
     }
@@ -66,18 +67,16 @@ public class ObjectRef {
         return oid;
     }
 
-    public int getIid () {
+    public String getIid () {
         return iid;
     }
 
     public String toString(){
         return "oref: [" + getHost() + ":" + getPort() + "(oid:" + getOid() +
-        		", iid:" + getIid() + ", iName:" + getInterfaceName() + ")]";
+                ", iid:" + getIid() +"]";
     }
 
-    public String getInterfaceName(){
-        return this.interfaceName;
-    }
+
 
     // An ObjectInvocation represents an invocation to a remote object
     class ObjectInvocation implements Invocation {

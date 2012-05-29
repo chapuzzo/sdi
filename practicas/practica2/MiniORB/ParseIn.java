@@ -71,10 +71,10 @@ public class ParseIn {
        //System.out.println ("Ojooooo!! : has de implmementar estoooo");
        //System.out.print ("gO: ");
        ObjectRef or = getObjectRef();
-       if (or.getIid() == 0 && or.getOid() == 0) return null;
+       if (or.getOid() == 0) return null;
        //System.out.println ("gotObjectRef: " + or);
        try { //creacion automática de Proxies en base a la clase del objeto
-            String ProxyName = "Proxy" + or.getInterfaceName();
+            String ProxyName = "Proxy" + or.getIid();
             //System.out.println ("ProxyName: " + ProxyName);
             Constructor<?>[] c = Class.forName(ProxyName).getConstructors();
             Object o = c[0].newInstance(or);
@@ -85,6 +85,7 @@ public class ParseIn {
        catch (Exception E){
            System.out.println ("El experimento ha salido mal :( pasamos al método clasico)");
        }
+       /*
        switch (or.getIid()) {
             case 1:  // "A"
                 //~ System.out.println ("recibiendo A");
@@ -97,7 +98,7 @@ public class ParseIn {
                 return new ProxyNameService(or);
             default:
                 System.out.println ("mal!!");
-       }
+       }*/
        return null;
     }
 
@@ -113,13 +114,11 @@ public class ParseIn {
         //System.out.println ("gotPort: " + port);
         int obId = getInt();
         //System.out.println ("gotOid: " + obId);
-        int iId = getInt();
+        String iId = getString();
         //System.out.println ("gotIid: " + iId);
-        String cls = getString();
-        //System.out.println ("gotIname: " + cls);
 
         // Create and return an object reference with those values
-        ObjectRef oref = new ObjectRef(host,port,obId,iId,cls);
+        ObjectRef oref = new ObjectRef(host,port,obId,iId);
         return oref;
     }
 }

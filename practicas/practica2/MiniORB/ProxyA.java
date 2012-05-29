@@ -9,8 +9,10 @@ public class ProxyA extends Proxy implements A {
         Invocation invo = oref.newInvocation();
         invo.putInt(1);
         invo.putString(s);
-
         invo.putInt(i);
+
+
+
         invo.getInt();
 
         return;
@@ -20,6 +22,8 @@ public class ProxyA extends Proxy implements A {
         Invocation invo = oref.newInvocation();
         invo.putInt(2);
         invo.putString(s);
+
+
 
         int ret = invo.getInt();
         invo.waitEnd();

@@ -8,7 +8,7 @@ public class MiniORB implements Runnable {
     // Table of exported objects: pairs (oid, object)
         private Hashtable<Integer,Object> objects;
     // Table of interfaces (skeletons): pairs (iid, skeleton)
-        private Hashtable<Integer,Skeleton> skeletons;
+        private Hashtable<String,Skeleton> skeletons;
     // Object counter
     // (used as objectId of the next object to create)
     private int objCount;
@@ -22,13 +22,13 @@ public class MiniORB implements Runnable {
     private int NSport;
 
     private static MiniORB orb;
-    
+
     private Thread orb_t;
     private boolean stop = false;
 
     public MiniORB (String host, int port) {
         objects = new Hashtable<Integer,Object>();
-        skeletons = new Hashtable<Integer,Skeleton>();
+        skeletons = new Hashtable<String,Skeleton>();
         objCount = 0;
         this.host = host;
         this.port = port;
@@ -56,10 +56,10 @@ public class MiniORB implements Runnable {
         // Add the object to the table of objects
         objects.put(new Integer(objCount), obj);
         // Add the skeleton to the table of skeletons
-        skeletons.put(new Integer(sk.getIid()), sk);
+        skeletons.put(sk.getIid(), sk);
 
         // Create an object reference for the object
-        ObjectRef oref = new ObjectRef(host, port, objCount, sk.getIid(), obj.getClass().getInterfaces()[0].getName());
+        ObjectRef oref = new ObjectRef(host, port, objCount, obj.getClass().getInterfaces()[0].getName());
         // Create a proxy for the object
         Proxy proxy = sk.createProxy(oref);
 
@@ -73,12 +73,12 @@ public class MiniORB implements Runnable {
     }
 
     // Returns the interface (skeleton) bound to the given interface id.
-    public synchronized Skeleton getInterface (int iid) {
-            return skeletons.get(new Integer(iid));
+    public synchronized Skeleton getInterface (String iid) {
+            return skeletons.get(new String(iid));
     }
 
     public synchronized NameService getNameService(){
-        ObjectRef oref = new ObjectRef(NShost, NSport, 1, 3, "NameService");
+        ObjectRef oref = new ObjectRef(NShost, NSport, 1, "NameService");
         return new ProxyNameService(oref);
     }
 
@@ -131,14 +131,14 @@ public class MiniORB implements Runnable {
     // The ParseOut object is used to write the result
     public void demultiplexer(ParseIn pin, ParseOut pou) {
         int oid;
-        int iid;
+        String iid;
         Object obj;
         Skeleton sk;
 
         // Read the identifier of the object to call
         oid = pin.getInt();
         // Read the identifier of its interface (skeleton)
-        iid = pin.getInt();
+        iid = pin.getString();
 
         // Look for the object in the table of objects
         // The object must have been registered previously!
@@ -146,7 +146,7 @@ public class MiniORB implements Runnable {
         // Look for the skeleton in the table of skeletons
         sk = getInterface(iid);
 
-        //System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: " + obj + ", sk: " + sk);
+        System.out.println ("oid: " + oid + ", iid: " + iid + ", obj: " + obj + ", sk: " + sk);
         // The skeleton knows how to attend the request
         sk.upcall(pin, pou, obj);
 
@@ -174,6 +174,8 @@ public class MiniORB implements Runnable {
             } catch (Exception e) {
                 System.out.println("I cant' handle a request(Worker)");
                 e.printStackTrace();
+                /*parseOut.putInt(1);
+                paseOut.putException(new MiniORBException());*/
             }
         }
     }
@@ -182,13 +184,13 @@ public class MiniORB implements Runnable {
         return orb;
     }
 
-	public void stop() {
-		try {
-			stop = true;
-			orb_t.join(200);
-		}
-		catch (Exception e) {
-			System.out.println("excepción en stop!!!");
-		}
-	}
+    public void stop() {
+        try {
+            stop = true;
+            orb_t.join(200);
+        }
+        catch (Exception e) {
+            System.out.println("excepción en stop!!!");
+        }
+    }
 }

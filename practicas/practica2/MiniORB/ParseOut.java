@@ -20,6 +20,7 @@ public class ParseOut {
         try {
             os.write(b);
         } catch (IOException ioe) {
+
         }
     }
 
@@ -37,6 +38,7 @@ public class ParseOut {
                 os.write(0);
             }
         } catch (IOException ioe) {
+
         }
     }
 
@@ -55,14 +57,14 @@ public class ParseOut {
        //System.out.print ("pO: ");
        Proxy px = null;
        //* //System.out.println("pO->"+obj.getClass().getInterfaces()[0].getName());
-       	if (obj == null ) {
-       		px = new Proxy(new ObjectRef(" ", 0, 0, 0, " "));
-       	}
-       	else
+        if (obj == null ) {
+            px = new Proxy(new ObjectRef("", 0, 0, ""));
+        }
+        else
         if (obj instanceof Proxy) {
-        	//* //System.out.println("YA es un proxy");
-        	px = (Proxy) obj;
-        	//System.out.println(px);
+            //* //System.out.println("YA es un proxy");
+            px = (Proxy) obj;
+            //System.out.println(px);
             //~ putObjectRef(px.oref);
         }
         else {
@@ -103,13 +105,11 @@ public class ParseOut {
             putInt(oref.getOid());
             //System.out.println("Put Oid");
             // Write the interface id of the object
-            putInt(oref.getIid());
+            putString(oref.getIid());
             //System.out.println("Put Iid");
-            putString(oref.getInterfaceName());
-            //System.out.println("Put iName");
         } catch (Exception ioe) {
-        	System.out.println("ieeep!! ALTO AHI!!");
-        	ioe.printStackTrace();
+            System.out.println("ieeep!! ALTO AHI!!");
+            ioe.printStackTrace();
         }
     }
 }
