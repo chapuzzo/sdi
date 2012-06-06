@@ -25,9 +25,7 @@ public class ChatChannelClass implements ChatChannel {
 	public void leaveUser(ChatUser u) {
 		if (userstable.containsKey(u.getName())) {
 			userstable.remove(u.getName());
-			for (ChatUser cu : userstable.values()) {
-				broadcastLeaving(cu.getName());
-			}
+			broadcastLeaving(u.getName());
 		}
 	}
 
@@ -47,8 +45,6 @@ public class ChatChannelClass implements ChatChannel {
 				System.out.println("realmente " + uname + " se ha ido , lo borro");
 				userstable.remove(uname);
 				broadcastLeaving(uname);
-			/*} finally {*/
-				
 			}
 		}
 	}
