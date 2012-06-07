@@ -1,0 +1,5 @@
+#!/bin/bash
+
+javac *.java
+jar -cfe chat.jar ChatClient *.class
+
