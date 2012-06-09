@@ -25,6 +25,9 @@ public class ChatServer {
 			ChatChannel CC = new ChatChannelClass("cc");
 			CS.registerChannel("cc", CC);
 			NS.bind("cs", CS);
+			/*ChatUser espia = new ChatUserClass("espía");
+			CS.registerUser(espia.getName(), espia);
+			CC.joinUser(espia);*/
 			while (true) {
 				Thread.sleep(15000);
 				CC.sendMessage(new ChatMessageClass("test"));

@@ -8,6 +8,7 @@ public class ProxyB extends Proxy implements B {
 		invo.putInt(1);
 		invo.putString(s);
 		invo.putInt(i);
+		invo.send();
 		invo.waitEnd();
 		return;
 	}
@@ -16,6 +17,7 @@ public class ProxyB extends Proxy implements B {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(2);
 		invo.putString(s);
+		invo.send();
 		int ret = invo.getInt();
 		invo.waitEnd();
 		return ret;
@@ -26,6 +28,7 @@ public class ProxyB extends Proxy implements B {
 		invo.putInt(3);
 		invo.putString(a);
 		invo.putString(b);
+		invo.send();
 		int ret = invo.getInt();
 		invo.waitEnd();
 		return ret;
@@ -36,6 +39,7 @@ public class ProxyB extends Proxy implements B {
 		invo.putInt(4);
 		invo.putString(a);
 		invo.putString(b);
+		invo.send();
 		int ret = invo.getInt();
 		invo.waitEnd();
 		return ret;

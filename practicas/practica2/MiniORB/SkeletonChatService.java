@@ -39,6 +39,11 @@ public class SkeletonChatService implements Skeleton {
 			parseOut.putObject(o);
 			break;
 		}
+		case Methods.GETCHANNELLIST: {
+			String[] channels = CS.getChatChannelList();
+			parseOut.putStringList(channels);
+			break;
+		}
 		default:
 			break;
 		}

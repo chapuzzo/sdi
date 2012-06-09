@@ -7,7 +7,9 @@ public interface ChatService {
 	public ChatUser getUser(String name);
 
 	public ChatChannel getChannel(String name);
-	// ~ listChannel array en el marshall/unmarshall
-	// ~ que pasa si no encuentra un objeto -> soporte a objetos nulos!
+	
+	public String[] getChatChannelList();
+	
+	public void deleteUser(String name); /* añadido por mi */
 
 }

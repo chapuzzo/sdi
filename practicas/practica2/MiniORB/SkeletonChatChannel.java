@@ -29,6 +29,11 @@ public class SkeletonChatChannel implements Skeleton {
 			parseOut.putString(name);
 			break;
 		}
+		case Methods.GETUSERLIST: {
+			String[] users = CC.getUserList();
+			parseOut.putStringList(users);
+			break;
+		}
 		}
 
 	}

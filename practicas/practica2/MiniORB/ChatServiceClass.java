@@ -13,6 +13,10 @@ public class ChatServiceClass implements ChatService {
 	public void registerUser(String name, ChatUser u) {
 		users.put(name, u);
 	}
+	
+	public void deleteUser(String name){
+		users.remove(name);
+	}
 
 	public void registerChannel(String name, ChatChannel c) {
 		channels.put(name, c);
@@ -24,6 +28,14 @@ public class ChatServiceClass implements ChatService {
 
 	public ChatChannel getChannel(String name) {
 		return channels.get(name);
+	}
+
+	public String[] getChatChannelList() {
+		Vector<String> res = new Vector<String>();
+		for (ChatChannel CC: channels.values()){
+			res.add(CC.getName());
+		}
+		return (String[])res.toArray(new String[]{});
 	}
 
 }

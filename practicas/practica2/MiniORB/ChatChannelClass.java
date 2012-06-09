@@ -3,7 +3,6 @@ import java.util.*;
 public class ChatChannelClass implements ChatChannel {
 
 	private String name;
-	// private ArrayList<ChatUser> users = new ArrayList<ChatUser>();
 	private Hashtable<String, ChatUser> userstable = new Hashtable<String, ChatUser>();
 
 	public ChatChannelClass(String name) {
@@ -19,7 +18,6 @@ public class ChatChannelClass implements ChatChannel {
 				System.out.println(cu);
 			}
 		}
-
 	}
 
 	public void leaveUser(ChatUser u) {
@@ -30,7 +28,7 @@ public class ChatChannelClass implements ChatChannel {
 	}
 
 	public void sendMessage(ChatMessage m) {
-		Vector<String> fallidos = new Vector<String>();		
+		Vector<String> fallidos = new Vector<String>();
 		for (String uname : userstable.keySet()) {
 			try {
 				userstable.get(uname).sendMessage(m);
@@ -42,7 +40,8 @@ public class ChatChannelClass implements ChatChannel {
 			try {
 				leaveUser(userstable.get(uname));
 			} catch (Exception E) {
-				System.out.println("realmente " + uname + " se ha ido , lo borro");
+				System.out.println("realmente " + uname
+						+ " se ha ido , lo borro");
 				userstable.remove(uname);
 				broadcastLeaving(uname);
 			}
@@ -50,11 +49,20 @@ public class ChatChannelClass implements ChatChannel {
 	}
 
 	private void broadcastLeaving(String uname) {
-		sendMessage(new ChatMessageClass("-> user " + uname
-				+ " leaves #" + getName()));
+		sendMessage(new ChatMessageClass("-> user " + uname + " leaves #"
+				+ getName()));
 	}
 
 	public String getName() {
 		return this.name;
+	}
+
+	public String[] getUserList() {
+		Vector<String> res = new Vector<String>();
+		for (ChatUser CU : userstable.values()) {
+			res.add(CU.getName());
+		}
+		return res.toArray(new String[]{});
+
 	}
 }

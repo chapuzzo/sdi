@@ -36,4 +36,13 @@ public class ProxyChatChannel extends Proxy implements ChatChannel {
 		return name;
 	}
 
+	public String[] getUserList() {
+		Invocation invo = oref.newInvocation();
+		invo.putInt(Methods.GETUSERLIST);
+		invo.send();
+		String[] res = invo.getStringList();
+		invo.waitEnd();
+		return res;
+	}
+
 }

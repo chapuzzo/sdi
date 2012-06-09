@@ -1,5 +1,4 @@
 import java.net.*;
-
 public class ObjectRef {
 	// Address of the ORB in which the referenced object is stored
 	private String host;
@@ -101,12 +100,23 @@ public class ObjectRef {
 		public void putObject(Object obj) {
 			parseOut.putObject(obj);
 		}
+		
+		public void putException(MiniORBException MIOE){
+			parseOut.putException(MIOE);
+		}
+		
+		public void putList(Object[] list){
+			parseOut.putList(list);
+		}
+		public void putStringList(String[] s) {
+			parseOut.putStringList(s);
+		}
 
 		// send is used to finish sending parameters
 		public void send() {
 			parseOut.putInt(0);
 		}
-
+		
 		public int getInt() {
 			return parseIn.getInt();
 		}
@@ -129,6 +139,14 @@ public class ObjectRef {
 
 		public MiniORBException getException() {
 			return parseIn.getException();
+		}
+		
+		public String[] getStringList(){
+			return parseIn.getStringList();
+		}
+		
+		public Object[] getList(){
+			return parseIn.getList();
 		}
 
 		// waitEnd is used to finish receiving parameters

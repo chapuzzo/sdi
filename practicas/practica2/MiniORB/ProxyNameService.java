@@ -12,6 +12,7 @@ public class ProxyNameService extends Proxy implements NameService {
 		invo.putInt(BIND);
 		invo.putString(s);
 		invo.putObject(o);
+		invo.send();
 		invo.waitEnd();
 		return;
 	}
@@ -20,6 +21,7 @@ public class ProxyNameService extends Proxy implements NameService {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(RESOLVE);
 		invo.putString(s);
+		invo.send();
 		Object o = invo.getObject();
 		invo.waitEnd();
 		return o;

@@ -14,7 +14,11 @@ public interface Invocation {
 	public void putString(String s);
 
 	public void putObject(Object obj);
-
+	
+	public void putList(Object[] list);
+	
+	public void putStringList(String[] list);
+	
 	public void send();
 
 	public int getInt();
@@ -26,6 +30,10 @@ public interface Invocation {
 	public String getString();
 
 	public Object getObject();
+	
+	public Object[] getList();
+	
+	public String[] getStringList();
 
 	public MiniORBException getException();
 

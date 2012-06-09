@@ -9,6 +9,7 @@ public class ProxyChatService extends Proxy implements ChatService {
 		invo.putInt(Methods.REGISTERUSER);
 		invo.putString(name);
 		invo.putObject(u);
+		invo.send();
 		invo.waitEnd();
 		return;
 	}
@@ -18,6 +19,7 @@ public class ProxyChatService extends Proxy implements ChatService {
 		invo.putInt(Methods.REGISTERCHANNEL);
 		invo.putString(name);
 		invo.putObject(c);
+		invo.send();
 		invo.waitEnd();
 		return;
 	}
@@ -26,6 +28,7 @@ public class ProxyChatService extends Proxy implements ChatService {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.GETUSER);
 		invo.putString(name);
+		invo.send();
 		ChatUser u = (ChatUser) invo.getObject();
 		invo.waitEnd();
 		return u;
@@ -35,9 +38,20 @@ public class ProxyChatService extends Proxy implements ChatService {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.GETCHANNEL);
 		invo.putString(name);
+		invo.send();
 		ChatChannel c = (ChatChannel) invo.getObject();
 		invo.waitEnd();
 		return c;
+	}
+
+	public String[] getChatChannelList() {
+		Invocation invo = oref.newInvocation();
+		invo.putInt(Methods.GETCHANNELLIST);
+		invo.send();
+		String[] res = invo.getStringList();
+		invo.waitEnd();
+		return res;
+		
 	}
 
 }

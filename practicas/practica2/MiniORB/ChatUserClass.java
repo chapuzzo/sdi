@@ -22,7 +22,7 @@ public class ChatUserClass implements ChatUser {
 		
 		int i = 80; while (i-- > 0) System.out.print("\b \b");
 		
-		System.out.println(/*"\r" +*/"'"+ m.getText()+"'");
+		System.out.println(/*"\r" +*/ m.getText());
 		cc.prompt();
 		cc.printBuffer();
 	}

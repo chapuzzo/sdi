@@ -6,4 +6,6 @@ public interface ChatChannel {
 	public void sendMessage(ChatMessage m);
 
 	public String getName();
+	
+	public String[] getUserList();
 }

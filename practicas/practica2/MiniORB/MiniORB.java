@@ -21,9 +21,6 @@ public class MiniORB implements Runnable {
 
 	private static MiniORB orb;
 
-	private Thread orb_t;
-	private boolean stop = false;
-
 	public MiniORB(String host, int port) {
 		this.objects = new Hashtable<Integer, Object>();
 		this.skeletons = new Hashtable<String, Skeleton>();
@@ -86,8 +83,7 @@ public class MiniORB implements Runnable {
 	public void serve() {
 		// Create a new thread and start it
 		// See the run() method!
-		orb_t = new Thread(this);
-		orb_t.start();
+		new Thread(this).start();
 	}
 
 	public void run() {
@@ -110,7 +106,7 @@ public class MiniORB implements Runnable {
 		}
 
 		// Wait for requests from clients
-		while (!stop) {
+		while (true) {
 			try {
 				// Accept a new request from a client
 				clientSocket = serverSocket.accept();
@@ -146,10 +142,10 @@ public class MiniORB implements Runnable {
 		obj = getObject(oid);
 		// Look for the skeleton in the table of skeletons
 		sk = getInterface(iid);
-
-		// TODO:
-		// System.out.println("oid: " + oid + ", iid: " + iid + ", obj: " + obj
-		// + ", sk: " + sk);
+		/*TODO:
+		System.out.println("demultiplexing (oid: " + oid + ", iid: " + iid
+				+ ", obj: " + obj + ", sk: " + sk + ")");
+		*/
 		// The skeleton knows how to attend the request
 		sk.upcall(pin, pou, obj);
 
@@ -190,12 +186,4 @@ public class MiniORB implements Runnable {
 		return orb;
 	}
 
-	public void stop() {
-		try {
-			stop = true;
-			orb_t.join(200);
-		} catch (Exception e) {
-			System.out.println("excepción en stop!!!");
-		}
-	}
 }

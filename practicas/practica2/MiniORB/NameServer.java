@@ -37,10 +37,6 @@ public class NameServer {
 		NameServiceClass objNS = new NameServiceClass();
 		SkeletonNameService skNS = new SkeletonNameService();
 
-		// Register the object (and its skeleton) in the ORB
-		// TO-DO Which are its object id and interface id?
-		// ~ orb.addObject(objA, skA);
-		// ~ orb.addObject(objB, skB);
 		orb.addObject(objNS, skNS);
 
 	}
