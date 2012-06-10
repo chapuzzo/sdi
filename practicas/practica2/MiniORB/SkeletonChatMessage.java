@@ -2,7 +2,8 @@ public class SkeletonChatMessage implements Skeleton {
 
 	private String iid = "ChatMessage";
 
-	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj) {
+	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj)
+			throws java.rmi.RemoteException {
 		ChatMessage CM = (ChatMessage) obj;
 		int methodNumber = parseIn.getInt();
 		switch (methodNumber) {

@@ -1,7 +1,8 @@
 import java.io.*;
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
-public class ChatClient {
+public class ChatClient implements Client {
 
 	String hostc, hostNS;
 	int portc, portNS, oid = 0, iid = 0;
@@ -53,7 +54,7 @@ public class ChatClient {
 				procesaEntrada();
 			}
 		} catch (Exception E) {
-			E.printStackTrace();			
+			E.printStackTrace();
 		} finally {
 			restoreTerminal();
 		}
@@ -80,7 +81,7 @@ public class ChatClient {
 		printBuffer();
 	}
 
-	private void procesaComandos() {
+	private void procesaComandos() throws java.rmi.RemoteException {
 		if (buffer.equals("/exit")) {
 			exit();
 		} else if (buffer.startsWith("/join")) {
@@ -99,30 +100,44 @@ public class ChatClient {
 		buffer = "";
 	}
 
-	private void sendMessage() {
+	private void sendMessage() throws java.rmi.RemoteException {
 		CC.sendMessage(new ChatMessageClass(CU.getName() + "> " + buffer));
 	}
 
-	private void exit() {
-		leaveChannel();
+	private void exit() throws java.rmi.RemoteException {
+		try {
+			leaveChannel();
+		} catch (Exception e) {
+		}
+		try {
+			CS.deleteUser(CU.getName());
+		} catch (Exception e) {
+			// total ya nos vamos, solo queda salir
+		}
 		restoreTerminal();
 		System.exit(0);
 	}
 
-	private void joinChannel() {
+	private void joinChannel() throws java.rmi.RemoteException {
 		String channelName = buffer.split(" ")[1];
 		leaveChannel();
-		this.CC = CS.getChannel(channelName);
-		this.CC.joinUser(CU);
+		CC = CS.getChannel(channelName);
+		if (CC != null)
+			CC.joinUser(CU);
+		else {
+			CU.sendMessage(new ChatMessageClass(
+					"Ese canal no existe, elige otro"));
+			displayChannels();
+		}
 	}
 
-	private void leaveChannel() {
+	private void leaveChannel() throws java.rmi.RemoteException {
 		if (CC != null)
 			CC.leaveUser(CU);
 		CC = null;
 	}
 
-	private void displayUsers() {
+	private void displayUsers() throws java.rmi.RemoteException {
 		String userList = String.format("Los Usuarios conectados a %s son:",
 				CC.getName());
 		for (String user : CC.getUserList()) {
@@ -131,12 +146,12 @@ public class ChatClient {
 		CU.sendMessage(new ChatMessageClass(userList));
 	}
 
-	private void displayWelcome() {
+	private void displayWelcome() throws RemoteException {
 		CU.sendMessage(new ChatMessageClass(
 				"No estás en ningún canal,\n\t/list para ver los disponibles\n\t/join <nombreCanal> para unirte a uno"));
 	}
 
-	private void displayChannels() {
+	private void displayChannels() throws RemoteException {
 		String channelList = String
 				.format("Los Canales disponibles en este servidor son:");
 		for (String channel : CS.getChatChannelList()) {
@@ -192,11 +207,11 @@ public class ChatClient {
 
 	private static void restoreTerminal() {
 		try {
-			/*stty(ttyConfig);
-			stty("echo");*/
-			System.out.println(
-			exec(new String[]{"sh", "-c" , "/usr/bin/reset < /dev/tty"})
-			);
+			/*
+			 * stty(ttyConfig); stty("echo");
+			 */
+			System.out.println(exec(new String[] { "sh", "-c",
+					"/usr/bin/reset < /dev/tty" }));
 		} catch (Exception E) {
 			System.out.println("WTF!!");
 		}
@@ -221,13 +236,23 @@ public class ChatClient {
 	}
 
 	public void prompt() {
+		clearLine();
+		System.out.print(prompt);
+	}
+
+	private void clearLine() {
 		int i = 80;
 		while (i-- > 0)
 			System.out.print("\b \b");
-		System.out.print(prompt);
 	}
 
 	public void printBuffer() {
 		System.out.print(buffer);
+	}
+
+	public void printMessage(String text) {
+		clearLine();
+		System.out.println(text);
+
 	}
 }

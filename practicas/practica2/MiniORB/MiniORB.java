@@ -1,3 +1,4 @@
+import java.rmi.RemoteException;
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -147,7 +148,13 @@ public class MiniORB implements Runnable {
 				+ ", obj: " + obj + ", sk: " + sk + ")");
 		*/
 		// The skeleton knows how to attend the request
-		sk.upcall(pin, pou, obj);
+		
+		try {
+			sk.upcall(pin, pou, obj);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Send something (e.g. a "0"),
 		// so there is always some data sent as a result

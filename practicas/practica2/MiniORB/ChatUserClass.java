@@ -1,14 +1,14 @@
 public class ChatUserClass implements ChatUser {
 	String name;
-	//String prompt = "Escribe tu mensaje -> ";
-	ChatClient cc;
+	// String prompt = "Escribe tu mensaje -> ";
+	Client cc;
 
 	public ChatUserClass(String name) {
 		this.name = name;
-		//System.out.print(prompt);
+		// System.out.print(prompt);
 	}
-	
-	public ChatUserClass(String name, ChatClient cc) {
+
+	public ChatUserClass(String name, Client cc) {
 		this(name);
 		this.cc = cc;
 		cc.prompt();
@@ -18,12 +18,19 @@ public class ChatUserClass implements ChatUser {
 		return this.name;
 	}
 
-	public void sendMessage(ChatMessage m) {
+	public void sendMessage(ChatMessage m) throws java.rmi.RemoteException {
+
 		
-		int i = 80; while (i-- > 0) System.out.print("\b \b");
-		
-		System.out.println(/*"\r" +*/ m.getText());
-		cc.prompt();
-		cc.printBuffer();
+		if (cc != null) {
+			cc.printMessage(m.getText());
+			cc.prompt();
+			cc.printBuffer();
+		} else {
+			int i = 80;
+			while (i-- > 0)
+				System.out.print("\b \b");
+			System.out.println(m.getText());
+		}
+
 	}
 }

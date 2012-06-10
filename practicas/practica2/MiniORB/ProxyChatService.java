@@ -51,7 +51,17 @@ public class ProxyChatService extends Proxy implements ChatService {
 		String[] res = invo.getStringList();
 		invo.waitEnd();
 		return res;
-		
+
+	}
+
+	public void deleteUser(String name) {
+		Invocation invo = oref.newInvocation();
+		invo.putInt(Methods.DELETEUSER);
+		invo.putString(name);
+		invo.send();
+		invo.waitEnd();
+		return;
+
 	}
 
 }

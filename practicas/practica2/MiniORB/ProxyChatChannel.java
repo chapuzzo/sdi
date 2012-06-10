@@ -8,6 +8,7 @@ public class ProxyChatChannel extends Proxy implements ChatChannel {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.JOINUSER);
 		invo.putObject(u);
+		invo.send();
 		invo.waitEnd();
 		return;
 	}
@@ -16,6 +17,7 @@ public class ProxyChatChannel extends Proxy implements ChatChannel {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.LEAVEUSER);
 		invo.putObject(u);
+		invo.send();
 		invo.waitEnd();
 		return;
 	}
@@ -24,6 +26,7 @@ public class ProxyChatChannel extends Proxy implements ChatChannel {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.SENDMESSAGE);
 		invo.putObject(m);
+		invo.send();
 		invo.waitEnd();
 		return;
 	}
@@ -32,6 +35,7 @@ public class ProxyChatChannel extends Proxy implements ChatChannel {
 		Invocation invo = oref.newInvocation();
 		invo.putInt(Methods.GETNAME);
 		String name = invo.getString();
+		invo.send();
 		invo.waitEnd();
 		return name;
 	}

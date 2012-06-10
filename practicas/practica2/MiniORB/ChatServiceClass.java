@@ -1,3 +1,4 @@
+import java.rmi.RemoteException;
 import java.util.*;
 
 public class ChatServiceClass implements ChatService {
@@ -30,7 +31,7 @@ public class ChatServiceClass implements ChatService {
 		return channels.get(name);
 	}
 
-	public String[] getChatChannelList() {
+	public String[] getChatChannelList() throws RemoteException {
 		Vector<String> res = new Vector<String>();
 		for (ChatChannel CC: channels.values()){
 			res.add(CC.getName());

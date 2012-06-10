@@ -8,6 +8,7 @@ public class Methods {
 	public static final int SENDMESSAGE = 7;
 	public static final int GETNAME = 8;
 	public static final int GETTEXT = 9;
-	public static final int GETCHANNELLIST = 10;
+	public static final int GETCHANNELLIST = 10; /* ampliaciones */
 	public static final int GETUSERLIST = 11;
+	public static final int DELETEUSER = 12;
 }

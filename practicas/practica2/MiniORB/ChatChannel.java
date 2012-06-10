@@ -1,11 +1,11 @@
-public interface ChatChannel {
-	public void joinUser(ChatUser u);
+public interface ChatChannel extends java.rmi.Remote{
+	public void joinUser(ChatUser u) throws java.rmi.RemoteException;
 
-	public void leaveUser(ChatUser u);
+	public void leaveUser(ChatUser u) throws java.rmi.RemoteException;
 
-	public void sendMessage(ChatMessage m);
+	public void sendMessage(ChatMessage m) throws java.rmi.RemoteException;
 
-	public String getName();
+	public String getName() throws java.rmi.RemoteException;
 	
-	public String[] getUserList();
+	public String[] getUserList() throws java.rmi.RemoteException;
 }

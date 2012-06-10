@@ -2,7 +2,7 @@ public class SkeletonChatChannel implements Skeleton {
 
 	private String iid = "ChatChannel";
 
-	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj) {
+	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj)  throws java.rmi.RemoteException{
 		ChatChannel CC = (ChatChannel) obj;
 		int methodNumber = parseIn.getInt();
 		switch (methodNumber) {

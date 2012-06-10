@@ -2,7 +2,7 @@ public class SkeletonChatService implements Skeleton {
 
 	private String iid = "ChatService";
 
-	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj) {
+	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj)  throws java.rmi.RemoteException{
 		ChatService CS = (ChatService) obj;
 
 		int methodNumber = parseIn.getInt();
@@ -29,6 +29,12 @@ public class SkeletonChatService implements Skeleton {
 			name = parseIn.getString();
 			o = CS.getUser(name);
 			parseOut.putObject(o);
+			break;
+		}
+		case Methods.DELETEUSER: {
+			String name;
+			name = parseIn.getString();
+			CS.deleteUser(name);
 			break;
 		}
 		case Methods.GETCHANNEL: {

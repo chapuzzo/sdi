@@ -2,7 +2,7 @@ public class SkeletonChatUser implements Skeleton {
 
 	private String iid = "ChatUser";
 
-	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj) {
+	public void upcall(ParseIn parseIn, ParseOut parseOut, Object obj)  throws java.rmi.RemoteException{
 		ChatUser CU = (ChatUser) obj;
 		int methodNumber = parseIn.getInt();
 		switch (methodNumber) {
